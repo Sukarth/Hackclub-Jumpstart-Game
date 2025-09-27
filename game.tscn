@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=4 uid="uid://yele7q4tlin3"]
+[gd_scene load_steps=7 format=4 uid="uid://yele7q4tlin3"]
 
 [ext_resource type="Texture2D" uid="uid://liwsgfq0uebh" path="res://res/tiles/cave/cave_wall_spritesheet.png" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://ccuespvssreem" path="res://player/player.tscn" id="2_feb5d"]
+[ext_resource type="PackedScene" uid="uid://dkpf7u1wwylm1" path="res://ui/SacrificeChoice.tscn" id="3_fc0e3"]
+[ext_resource type="Script" uid="uid://oadamf1s68l5" path="res://scripts/LevelManager.gd" id="4_7jktm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_feb5d"]
 texture = ExtResource("1_e2o6t")
@@ -39,3 +41,10 @@ tile_set = SubResource("TileSet_7jktm")
 position = Vector2(507, 111)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SacrificeChoice" parent="CanvasLayer" instance=ExtResource("3_fc0e3")]
+
+[node name="LevelManager" type="Node" parent="."]
+script = ExtResource("4_7jktm")
