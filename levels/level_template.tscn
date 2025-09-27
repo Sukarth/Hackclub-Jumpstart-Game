@@ -8,6 +8,8 @@
 
 [node name="Player" parent="." instance=ExtResource("1_vgt4e")]
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_13k7l")
 format = 2
