@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkpf7u1wwylm1"]
+
+[ext_resource type="Script" uid="uid://dgnqi6qttc8j8" path="res://ui/SacrificeChoice.gd" id="1_uq41d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6xs17"]
+bg_color = Color(0, 0, 0, 0.6509804)
+
+[node name="SacrificeChoice" type="Control" groups=["sacrifice_ui"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uq41d")
+
+[node name="BackgroundPanel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_6xs17")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="DescriptionLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ChoiceContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="CancelButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Cancel"
