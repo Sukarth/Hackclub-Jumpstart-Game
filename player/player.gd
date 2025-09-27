@@ -56,7 +56,7 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, direction * SPEED, SPEED * 2.0 * delta) # Last value is acceleration
 		# Flip the sprite
 		if %Sprite: # Ensure the node exists
-			%Sprite.flip_h = (direction < 0)
+			%Sprite.flip_h = (direction > 0)
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED * 2.0 * delta) # Decelerate to a stop
 
@@ -70,11 +70,11 @@ func update_animations():
 
 	if not is_on_floor():
 		if velocity.y < 0:
-			%Sprite.play("jump")
+			%Sprite.play("default") #jump
 		else:
-			%Sprite.play("fall")
+			%Sprite.play("default") #fall
 	else:
 		if abs(velocity.x) > 5: # A small threshold to avoid switching to "run" if barely moving
-			%Sprite.play("run")
+			%Sprite.play("move") # run
 		else:
-			%Sprite.play("idle")
+			%Sprite.play("default") #idle
