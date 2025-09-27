@@ -1,80 +1,163 @@
 extends CharacterBody2D
 
-# Movement Constants
-const SPEED = 300.0       # Horizontal movement speed (pixels/second)
-const JUMP_VELOCITY = -600.0 # Jump strength (negative because Y goes down)
+# Movement constants
+const BASE_SPEED = 300.0
+const BASE_JUMP_VELOCITY = -800.0
+const SLOW_SPEED = 100.0  # Speed when running is sacrificed
 
-# Gravity - you can get it from project settings or define it here
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+# Visual feedback
+@onready var sprite = $Sprite2D if has_node("Sprite2D") else null
+var original_modulate: Color
+var glitch_tween: Tween
 
-# Other variables you might need
-var air_jumps = 1         # For a double jump
-var current_air_jumps = 0
-
-# Variables for "game feel" techniques (we'll initialize them later)
-var coyote_timer = 0.0
-const COYOTE_TIME_THRESHOLD = 0.1 # 100 milliseconds of coyote time
-
-var jump_buffer_timer = 0.0
-const JUMP_BUFFER_TIME_THRESHOLD = 0.1 # 100 milliseconds for jump buffer
-
-func _physics_process(delta):
-	# Apply gravity
-	if not is_on_floor():
-		velocity.y += gravity * delta
-	else:
-		# Reset air jumps and coyote time when on the floor
-		current_air_jumps = air_jumps
-		coyote_timer = COYOTE_TIME_THRESHOLD # Reload coyote time
-
-	# Update timers
-	if coyote_timer > 0:
-		coyote_timer -= delta
-	if jump_buffer_timer > 0:
-		jump_buffer_timer -= delta
-
-	# Handle Jump input (with buffer and coyote time)
-	if Input.is_action_just_pressed("jump"): # "jump" is an action defined in InputMap
-		jump_buffer_timer = JUMP_BUFFER_TIME_THRESHOLD
-
-	if jump_buffer_timer > 0:
-		if is_on_floor() or coyote_timer > 0: # Normal jump or coyote time jump
-			velocity.y = JUMP_VELOCITY
-			jump_buffer_timer = 0 # Consume buffer
-			coyote_timer = 0 # Consume coyote time if used
-		elif current_air_jumps > 0: # Air jump (double jump, etc.)
-			velocity.y = JUMP_VELOCITY * 0.8 # Perhaps a bit weaker
-			current_air_jumps -= 1
-			jump_buffer_timer = 0 # Consume buffer
-
-	# Handle Horizontal input
-	var direction = Input.get_axis("move_left", "move_right") # "move_left" & "move_right" from InputMap
-
-	# Movement with simple acceleration/deceleration (you can make this more complex)
-	if direction:
-		# We use move_toward for basic acceleration/deceleration
-		velocity.x = move_toward(velocity.x, direction * SPEED, SPEED * 2.0 * delta) # Last value is acceleration
-		# Flip the sprite
-		if %Sprite: # Ensure the node exists
-			%Sprite.flip_h = (direction < 0)
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED * 2.0 * delta) # Decelerate to a stop
-
-	move_and_slide()
-
-	# Update animations (simplified)
-	update_animations()
+func _ready():
+	# Store original appearance
+	if sprite:
+		original_modulate = sprite.modulate
 	
-func update_animations():
-	if not %Sprite: return # Exit if no AnimatedSprite2D
+	# Connect to sacrifice signals from GameManager
+	GameManager.physics_sacrificed.connect(_on_physics_sacrificed)
+	GameManager.ability_sacrificed.connect(_on_ability_sacrificed)
+	GameManager.visual_sacrificed.connect(_on_visual_sacrificed)
+	
+	print("🎮 Player ready! Use WASD/Arrows + Space to move")
 
-	if not is_on_floor():
-		if velocity.y < 0:
-			%Sprite.play("jump")
-		else:
-			%Sprite.play("fall")
+func _physics_process(delta: float) -> void:
+	# === GRAVITY SYSTEM ===
+	if GameManager.has_gravity:
+		# Normal gravity
+		if not is_on_floor():
+			velocity += get_gravity() * delta
 	else:
-		if abs(velocity.x) > 5: # A small threshold to avoid switching to "run" if barely moving
-			%Sprite.play("run")
+		# Zero gravity - floating controls
+		if Input.is_action_pressed("ui_up"):
+			velocity.y = -BASE_SPEED * 0.7
+		elif Input.is_action_pressed("ui_down"):
+			velocity.y = BASE_SPEED * 0.7
 		else:
-			%Sprite.play("idle")
+			# Gradual stop in zero-g
+			velocity.y = move_toward(velocity.y, 0, BASE_SPEED * 2 * delta)
+
+	# === JUMPING SYSTEM ===
+	if Input.is_action_just_pressed("ui_accept") and GameManager.can_jump:
+		if GameManager.has_gravity:
+			# Normal jump (only on ground)
+			if is_on_floor():
+				velocity.y = BASE_JUMP_VELOCITY
+		else:
+			# Zero-g "push" (can use anywhere)
+			velocity.y = BASE_JUMP_VELOCITY * 0.4
+
+	# === MOVEMENT SYSTEM ===
+	var direction := Input.get_axis("ui_left", "ui_right")
+	var current_speed: float
+	
+	if GameManager.can_run:
+		current_speed = BASE_SPEED
+	else:
+		current_speed = SLOW_SPEED  # Slower when running is sacrificed
+	
+	if direction:
+		velocity.x = direction * current_speed
+	else:
+		# === FRICTION SYSTEM ===
+		if GameManager.has_friction:
+			# Normal stopping
+			velocity.x = move_toward(velocity.x, 0, current_speed)
+		else:
+			# Slippery - momentum continues
+			velocity.x *= 0.95  # Very gradual slowdown
+
+	# === COLLISION SYSTEM ===
+	if GameManager.has_collision:
+		# Normal physics
+		move_and_slide()
+	else:
+		# Phase through everything
+		global_position += velocity * delta
+
+# Sacrifice reaction functions
+func _on_physics_sacrificed(law_type: String):
+	if not sprite:
+		return
+		
+	match law_type:
+		"gravity":
+			# Cyan tint for gravity loss
+			tint_player(Color.CYAN)
+			print("🌌 Player: Floating freely now!")
+		"friction":
+			# Magenta tint for friction loss
+			tint_player(Color.MAGENTA)
+			print("🧊 Player: Everything feels slippery!")
+		"collision":
+			# Semi-transparent for phasing
+			sprite.modulate.a = 0.6
+			start_glitch_effect()
+			print("👻 Player: Phasing through reality!")
+
+func _on_ability_sacrificed(ability_type: String):
+	match ability_type:
+		"jump":
+			print("⬇️ Player: Legs feel heavy, can't jump!")
+		"run":
+			print("🐌 Player: Moving like walking through mud!")
+		"light":
+			if sprite:
+				sprite.modulate = sprite.modulate.darkened(0.5)
+			print("🕳️ Player: The world grows darker!")
+
+func _on_visual_sacrificed(visual_type: String):
+	if sprite:
+		# Increase visual corruption
+		sprite.modulate = sprite.modulate.lerp(Color.RED, 0.2)
+		print("📺 Player: Reality glitches more...")
+
+# Visual effect functions
+func tint_player(color: Color):
+	if not sprite:
+		return
+		
+	# Smooth color transition
+	var tween = create_tween()
+	tween.tween_property(sprite, "modulate", color, 0.5)
+
+func start_glitch_effect():
+	if not sprite:
+		return
+		
+	# Stop existing glitch
+	if glitch_tween:
+		glitch_tween.kill()
+	
+	# Start glitching position
+	glitch_tween = create_tween()
+	glitch_tween.set_loops()
+	glitch_tween.tween_callback(_do_glitch).set_delay(0.3)
+
+func _do_glitch():
+	if not sprite or GameManager.has_collision:
+		return
+		
+	# Random position offset
+	var original_pos = sprite.position
+	var glitch_offset = Vector2(
+		randf_range(-4, 4), 
+		randf_range(-4, 4)
+	)
+	
+	# Quick glitch then return
+	sprite.position = original_pos + glitch_offset
+	await get_tree().create_timer(0.05).timeout
+	sprite.position = original_pos
+
+# Debug info (remove later)
+func _input(event):
+	if event.is_action_pressed("ui_text_completion_replace"):  # Tab key
+		print("🔍 DEBUG - Current sacrifices:")
+		print("  Gravity: ", not GameManager.has_gravity)
+		print("  Friction: ", not GameManager.has_friction)
+		print("  Collision: ", not GameManager.has_collision)
+		print("  Jump: ", not GameManager.can_jump)
+		print("  Run: ", not GameManager.can_run)
+		print("  Total sacrifices: ", GameManager.get_sacrifice_count())
