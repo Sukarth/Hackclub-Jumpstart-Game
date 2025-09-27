@@ -7,6 +7,8 @@ const SLOW_SPEED = 150.0  # Speed when running is sacrificed
 
 var spawned = false
 
+var walking_sfx = load("res://sfx/walking.wav")
+
 # Visual feedback
 @onready var sprite = $Sprite2D if has_node("Sprite2D") else null
 var original_modulate: Color
@@ -14,7 +16,7 @@ var glitch_tween: Tween
 
 func _ready():
 	%Sprite.play("spawn", -1,true)
-	return
+	
 	# Add to player group for trigger detection
 	add_to_group("player")
 	
@@ -97,12 +99,23 @@ func _physics_process(delta: float) -> void:
 	
 	if velocity.y > treshold:
 		%Sprite.play("fall")
+		%AudioPlayer.stream = null
+		%AudioPlayer.stop()
 	elif velocity.y < -treshold:
 		%Sprite.play("jump")
+		%AudioPlayer.stream = null
+		%AudioPlayer.stop()
 	elif abs(velocity).x < treshold:
 		%Sprite.play("default")
+		%AudioPlayer.stream = null
+		%AudioPlayer.stop()
 	else: 
 		%Sprite.play("move")
+		if velocity.y == 0 && !%AudioPlayer.playing:
+			%AudioPlayer.stream = walking_sfx
+			%AudioPlayer.play()
+			print("Should be playing")
+		
 
 # Sacrifice reaction functions
 func _on_physics_sacrificed(law_type: String):
@@ -179,10 +192,10 @@ func _do_glitch():
 	await get_tree().create_timer(0.05).timeout
 	sprite.position = original_pos
 
-func _input(event):
+func _input(_event):
 	var sacrifice_ui = get_tree().get_first_node_in_group("sacrifice_ui")
 	if sacrifice_ui and sacrifice_ui.visible:
-		return
+		pass
 
 
 func _on_sprite_animation_finished() -> void:
