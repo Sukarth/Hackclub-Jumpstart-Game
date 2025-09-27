@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://gh26gs2x7ejr"]
+[gd_scene load_steps=7 format=3 uid="uid://gh26gs2x7ejr"]
 
 [ext_resource type="Script" uid="uid://chl2jix5td472" path="res://scripts/MainMenu.gd" id="1_06t4h"]
 [ext_resource type="Texture2D" uid="uid://wivhujwldiv6" path="res://res/background.png" id="2_7vrkn"]
+[ext_resource type="PackedScene" path="res://Checkpoint.tscn" id="3_fu7sn"]
 
 [sub_resource type="Animation" id="Animation_7vrkn"]
 length = 0.001
@@ -53,10 +54,10 @@ script = ExtResource("1_06t4h")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_filter = 1
-layout_mode = 1
-offset_top = -4.0
+layout_mode = 0
+offset_top = -30.0
 offset_right = 288.0
-offset_bottom = 172.0
+offset_bottom = 146.0
 scale = Vector2(4, 4)
 texture = ExtResource("2_7vrkn")
 
@@ -86,13 +87,9 @@ mouse_filter = 1
 theme_override_font_sizes/font_size = 32
 text = "Start"
 
-[node name="CreditsButton" type="Button" parent="MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-z_index = 1
-layout_mode = 2
-mouse_filter = 1
-theme_override_font_sizes/font_size = 32
-text = "Credits"
+[node name="Checkpoint" parent="MarginContainer/VBoxContainer/StartButton" instance=ExtResource("3_fu7sn")]
+position = Vector2(24, 514)
+is_level_start = true
 
 [node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -105,10 +102,8 @@ text = "Quit"
 [node name="FadeBox" type="ColorRect" parent="."]
 z_index = 2
 layout_mode = 0
-offset_left = 2.0
-offset_top = -2.0
-offset_right = 1154.0
-offset_bottom = 646.0
+offset_right = 1152.0
+offset_bottom = 648.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
@@ -119,7 +114,8 @@ libraries = {
 &"": SubResource("AnimationLibrary_fu7sn")
 }
 
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_mouse_exited"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_pressed"]
 [connection signal="animation_finished" from="FadeBox/FadeAnimator" to="." method="_on_fade_animator_animation_finished"]

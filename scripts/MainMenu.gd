@@ -23,3 +23,8 @@ func _on_fade_animator_animation_finished(anim_name: StringName) -> void:
 		_:
 			pass
 	pass # Replace with function body.
+
+
+func _on_credits_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://credits.tscn")
+	pass
