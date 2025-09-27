@@ -14,14 +14,14 @@ var levels = {
 		"sacrifice_count": 0
 	},
 	"stable_realm": {
-		"name": "The Stable Realm", 
+		"name": "The Stable Realm",
 		"description": "A peaceful forest - but change approaches...",
 		"required_sacrifices": ["gravity", "friction", "jump"],
 		"sacrifice_count": 1
 	},
 	"fractured_heights": {
 		"name": "Fractured Heights",
-		"description": "Floating islands demand different movement...", 
+		"description": "Floating islands demand different movement...",
 		"required_sacrifices": ["collision", "run", "light"],
 		"sacrifice_count": 1
 	},
@@ -38,7 +38,7 @@ var levels = {
 		"sacrifice_count": 1
 	},
 	"altar_restoration": {
-		"name": "The Altar of Restoration", 
+		"name": "The Altar of Restoration",
 		"description": "The final sanctuary where all is restored...",
 		"required_sacrifices": [],
 		"sacrifice_count": 0
@@ -51,16 +51,21 @@ var levels_completed: Array[String] = []
 var sacrifice_ui: Control = null
 
 func _ready():
+	add_to_group("level_manager")
 	print("🗺 LevelManager ready")
 	# Connect to GameManager signals if needed
 
 func set_sacrifice_ui(ui_node: Control):
+	print("🗺 LevelManager.set_sacrifice_ui() called with: ", ui_node)
 	sacrifice_ui = ui_node
 	if sacrifice_ui:
+		print("  UI node is valid, connecting signals...")
 		# Connect to sacrifice UI signals
 		sacrifice_ui.sacrifice_made.connect(_on_sacrifice_made)
 		sacrifice_ui.choice_cancelled.connect(_on_sacrifice_cancelled)
-		print("📝 Connected to SacrificeChoice UI")
+		print("📝 Connected to SacrificeChoice UI - reference stored!")
+	else:
+		print("  ⚠️ UI node is null!")
 
 func start_level(level_key: String):
 	if not level_key in levels:
@@ -95,7 +100,7 @@ func trigger_sacrifice_requirement(reason: String = ""):
 		return
 	
 	# Filter available sacrifices (only show what hasn't been sacrificed yet)
-	var available_sacrifices = []
+	var available_sacrifices: Array[String] = []
 	for sacrifice in level_data.required_sacrifices:
 		if GameManager.can_make_sacrifice(sacrifice):
 			available_sacrifices.append(sacrifice)
@@ -153,14 +158,14 @@ func complete_current_level():
 
 func get_next_level() -> String:
 	# Simple progression - you can make this more sophisticated
-	var level_order = ["tutorial", "stable_realm", "fractured_heights", 
+	var level_order = ["tutorial", "stable_realm", "fractured_heights",
 					  "void_labyrinth", "chaos_theory", "altar_restoration"]
 	
 	var current_index = level_order.find(current_level)
 	if current_index >= 0 and current_index < level_order.size() - 1:
 		return level_order[current_index + 1]
 	else:
-		return ""  # No more levels
+		return "" # No more levels
 
 func get_current_level_info() -> Dictionary:
 	return levels.get(current_level, {})
@@ -179,12 +184,50 @@ func get_progress_summary() -> Dictionary:
 # Debug functions
 func _input(event):
 	# Temporary test controls (remove later)
-	if event.is_action_pressed("ui_page_down"):  # Page Down
+	if event.is_action_pressed("trigger_sacrifice"): # Down Arrow
 		print("🔮 [DEBUG] Triggering sacrifice requirement")
-		trigger_sacrifice_requirement("Debug test")
+		debug_trigger_sacrifice()
 	
-	elif event.is_action_pressed("ui_page_up"):  # Page Up
+	elif event.is_action_pressed("show_progress"): # Up Arrow
 		print("📊 [DEBUG] Progress summary:")
 		var summary = get_progress_summary()
 		for key in summary:
 			print("  ", key, ": ", summary[key])
+
+func debug_trigger_sacrifice():
+	"""Debug function to trigger sacrifice UI regardless of level requirements"""
+	print("🔮 [DEBUG] Forcing sacrifice UI to open...")
+	print("  Current sacrifice_ui reference: ", sacrifice_ui)
+	print("  Is sacrifice_ui valid? ", sacrifice_ui != null)
+	
+	# Try to find UI again if it's null
+	if not sacrifice_ui:
+		print("  Attempting to find UI in scene tree...")
+		sacrifice_ui = get_tree().get_first_node_in_group("sacrifice_ui")
+		print("  Found via group search: ", sacrifice_ui != null)
+	
+	# Get all available sacrifices (not already made)
+	var available_sacrifices: Array[String] = []
+	var all_possible = ["gravity", "friction", "collision", "jump", "run", "light"]
+	
+	for sacrifice in all_possible:
+		if GameManager.can_make_sacrifice(sacrifice):
+			available_sacrifices.append(sacrifice)
+	
+	print("  Available sacrifices: ", available_sacrifices)
+	
+	if available_sacrifices.is_empty():
+		print("⚠️ [DEBUG] No sacrifices available - all have been made!")
+		return
+	
+	# Show sacrifice UI if available
+	if sacrifice_ui:
+		print("  Calling sacrifice_ui.show_sacrifice_options()...")
+		sacrifice_ui.show_sacrifice_options(
+			"DEBUG TEST - " + levels[current_level].name,
+			1,
+			available_sacrifices
+		)
+		print("✨ [DEBUG] Sacrifice UI should now be visible!")
+	else:
+		print("⚠️ [DEBUG] No sacrifice UI found! UI reference is null.")

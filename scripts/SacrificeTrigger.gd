@@ -3,10 +3,10 @@ extends Area2D
 
 # Configuration (set in editor or script)
 @export var trigger_message: String = "Progress requires sacrifice..."
-@export var required_sacrifices: Array[String] = []  # Specific sacrifices, or empty for any
-@export var sacrifice_count: int = 1  # How many sacrifices needed
-@export var one_time_only: bool = true  # Trigger only once
-@export var level_name_override: String = ""  # Custom level name for UI
+@export var required_sacrifices: Array[String] = [] # Specific sacrifices, or empty for any
+@export var sacrifice_count: int = 1 # How many sacrifices needed
+@export var one_time_only: bool = true # Trigger only once
+@export var level_name_override: String = "" # Custom level name for UI
 
 # Internal state
 var has_triggered: bool = false
@@ -26,7 +26,7 @@ func _ready():
 
 func _on_body_entered(body: Node2D):
 	# Check if it's the player
-	if not body.is_in_group("player") and not body.name.to_lower().contains("player"):
+	if not body.is_in_group("player"):
 		return
 	
 	if one_time_only and has_triggered:
@@ -38,7 +38,7 @@ func _on_body_entered(body: Node2D):
 
 func _on_body_exited(body: Node2D):
 	# Optional: Handle player leaving trigger area
-	if body.is_in_group("player") or body.name.to_lower().contains("player"):
+	if body.is_in_group("player"):
 		print("⚡ Player left SacrificeTrigger area")
 
 func trigger_sacrifice_requirement():
@@ -82,7 +82,7 @@ func trigger_sacrifice_fallback():
 
 func get_available_sacrifices() -> Array[String]:
 	"""Get list of sacrifices that can still be made"""
-	var available = []
+	var available: Array[String] = []
 	
 	if required_sacrifices.is_empty():
 		# Default: all possible sacrifices
@@ -117,12 +117,13 @@ func _draw():
 		# Draw trigger area outline in debug mode
 		var shape = $CollisionShape2D.shape if has_node("CollisionShape2D") else null
 		if shape and shape is RectangleShape2D:
-			var rect = Rect2(-shape.size/2, shape.size)
+			var rect = Rect2(-shape.size / 2, shape.size)
 			var color = Color.YELLOW if not has_triggered else Color.GRAY
 			color.a = 0.3
 			draw_rect(rect, color)
 			# Draw trigger message
-			draw_string(get_theme_default_font(), Vector2(-50, -shape.size.y/2 - 10), 
+			var font = ThemeDB.fallback_font
+			draw_string(font, Vector2(-50, -shape.size.y / 2 - 10),
 					   trigger_message, HORIZONTAL_ALIGNMENT_CENTER, -1, 12, color)
 
 # Make this node detectable by groups

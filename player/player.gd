@@ -11,6 +11,9 @@ var original_modulate: Color
 var glitch_tween: Tween
 
 func _ready():
+	# Add to player group for trigger detection
+	add_to_group("player")
+	
 	# Store original appearance
 	if sprite:
 		original_modulate = sprite.modulate
@@ -50,7 +53,7 @@ func _physics_process(delta: float) -> void:
 	var direction := 0.0
 	if Input.is_action_pressed("move_left"):
 		direction -= 1.0
-	if Input.is_action_pressed("move_right"):
+	if Input.is_key_pressed(KEY_D):
 		direction += 1.0
 	
 	var current_speed: float
@@ -174,7 +177,7 @@ func _input(event):
 	if sacrifice_ui and sacrifice_ui.visible:
 		return
 		
-	if event.is_action("debug"):
+	if Input.is_key_pressed(KEY_TAB):
 		print("🔍 DEBUG - Current sacrifices:")
 		print("  Gravity: ", not GameManager.has_gravity)
 		print("  Friction: ", not GameManager.has_friction)

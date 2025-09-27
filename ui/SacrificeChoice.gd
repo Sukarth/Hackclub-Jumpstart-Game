@@ -16,8 +16,16 @@ signal choice_cancelled
 var current_choices: Array[Dictionary] = []
 
 func _ready():
+	# Add to groups for easy finding
+	add_to_group("sacrifice_ui")
+	add_to_group("ui")
+	
+	# Enable processing during pause
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	
 	# Connect cancel button if it exists
 	if cancel_button:
+		cancel_button.process_mode = Node.PROCESS_MODE_ALWAYS
 		cancel_button.pressed.connect(_on_cancel_pressed)
 	
 	# Start hidden
@@ -73,6 +81,9 @@ func create_sacrifice_button(sacrifice_name: String):
 	var button = Button.new()
 	var sacrifice_info = get_sacrifice_info(sacrifice_name)
 	
+	# Enable button to work during pause
+	button.process_mode = Node.PROCESS_MODE_ALWAYS
+	
 	button.text = sacrifice_info.title
 	button.tooltip_text = sacrifice_info.description
 	button.custom_minimum_size = Vector2(300, 50)
@@ -105,7 +116,7 @@ func get_sacrifice_info(sacrifice_name: String) -> Dictionary:
 			}
 		"friction":
 			return {
-				"title": "🧊 Sacrifice Friction", 
+				"title": "🧊 Sacrifice Friction",
 				"description": "Slide endlessly on surfaces - momentum never stops, but movement becomes unpredictable.",
 				"type": "physics"
 			}
@@ -141,6 +152,7 @@ func get_sacrifice_info(sacrifice_name: String) -> Dictionary:
 			}
 
 func _on_sacrifice_chosen(sacrifice_name: String, sacrifice_type: String):
+	print("🔥 [SacrificeUI] Button clicked: ", sacrifice_name, " (type: ", sacrifice_type, ")")
 	print("✨ Sacrifice chosen: ", sacrifice_name, " (type: ", sacrifice_type, ")")
 	
 	# Apply the sacrifice through GameManager
@@ -158,6 +170,7 @@ func _on_sacrifice_chosen(sacrifice_name: String, sacrifice_type: String):
 	hide_ui()
 
 func _on_cancel_pressed():
+	print("🔥 [SacrificeUI] Cancel button clicked!")
 	print("❌ Sacrifice cancelled")
 	choice_cancelled.emit()
 	hide_ui()
@@ -179,5 +192,5 @@ func request_sacrifice_for_level(level_name: String, sacrifice_count: int = 1):
 
 # Handle input while UI is shown
 func _input(event):
-	if visible and event.is_action_pressed("ui_cancel"):
+	if visible and event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 		_on_cancel_pressed()
