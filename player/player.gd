@@ -81,6 +81,18 @@ func _physics_process(delta: float) -> void:
 	else:
 		# Phase through everything
 		global_position += velocity * delta
+	print(velocity)
+	
+	%Sprite.flip_h = velocity.x > 0
+	
+	if abs(velocity).x < 0.1:
+		%Sprite.play("default")
+	elif velocity.y > 0.1:
+		%Sprite.play("default")
+	elif velocity.y > 0.1:
+		%Sprite.play("default")
+	else: 
+		%Sprite.play("move")
 
 # Sacrifice reaction functions
 func _on_physics_sacrificed(law_type: String):
