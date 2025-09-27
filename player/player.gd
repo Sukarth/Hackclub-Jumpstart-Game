@@ -58,19 +58,16 @@ func _physics_process(delta: float) -> void:
 		current_speed = SLOW_SPEED  # Slower when running is sacrificed
 	
 	if direction:
-		# We use move_toward for basic acceleration/deceleration
-		velocity.x = move_toward(velocity.x, direction * current_speed, current_speed * 2.0 * delta) # Last value is acceleration
-		# Flip the sprite
-		if %Sprite: # Ensure the node exists
-			%Sprite.flip_h = (direction > 0)
 		velocity.x = direction * current_speed
+		# Flip sprite if it exists
+		if sprite:
+			sprite.flip_h = (direction < 0)
 	else:
 		# === FRICTION SYSTEM ===
 		if GameManager.has_friction:
 			# Normal stopping
 			velocity.x = move_toward(velocity.x, 0, current_speed)
 		else:
-			%Sprite.play("default") #fall
 			# Slippery - momentum continues
 			velocity.x *= 0.95  # Very gradual slowdown
 
@@ -157,8 +154,13 @@ func _do_glitch():
 	await get_tree().create_timer(0.05).timeout
 	sprite.position = original_pos
 
-# Debug info (remove later)
+# Debug info (only process when UI is not visible)
 func _input(event):
+	# Check if sacrifice UI is open - don't process game inputs if it is
+	var sacrifice_ui = get_tree().get_first_node_in_group("sacrifice_ui")
+	if sacrifice_ui and sacrifice_ui.visible:
+		return
+		
 	if event.is_action_pressed("ui_text_completion_replace"):  # Tab key
 		print("🔍 DEBUG - Current sacrifices:")
 		print("  Gravity: ", not GameManager.has_gravity)
