@@ -3,6 +3,7 @@ extends Control
 
 
 func _on_start_pressed():
+	$AudioStreamPlayer.play()
 	%FadeAnimator.play("fade_out")
 
 func _on_quit_pressed():
@@ -12,6 +13,7 @@ func _on_quit_pressed():
 # Handle keyboard input
 func _input(event):
 	if event.is_action_pressed("jump"): # Space bar to start
+		$AudioStreamPlayer.play()
 		_on_start_pressed()
 
 
@@ -28,3 +30,8 @@ func _on_fade_animator_animation_finished(anim_name: StringName) -> void:
 func _on_credits_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://credits.tscn")
 	pass
+
+
+func _on_ready() -> void:
+	$AudioStreamPlayer.play()
+	pass # Replace with function body.

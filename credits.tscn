@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbo4g85p8gd4h"]
+[gd_scene load_steps=7 format=3 uid="uid://dbo4g85p8gd4h"]
 
-[ext_resource type="Script" uid="uid://iyryjj3d4nuv" path="res://Credits.gd" id="1_c1t8d"]
+[ext_resource type="Script" uid="uid://iyryjj3d4nuv" path="res://scripts/Credits.gd" id="1_c1t8d"]
 [ext_resource type="Texture2D" uid="uid://wivhujwldiv6" path="res://res/background.png" id="2_g4wvt"]
+[ext_resource type="AudioStream" uid="uid://b17fc45ywxq28" path="res://sfx/button_click.mp3" id="3_g4wvt"]
 
 [sub_resource type="Animation" id="Animation_7vrkn"]
 length = 0.001
@@ -113,5 +114,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_fu7sn")
 }
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_g4wvt")
+
+[connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="animation_finished" from="FadeBox/FadeAnimator" to="." method="_on_fade_animator_animation_finished"]
