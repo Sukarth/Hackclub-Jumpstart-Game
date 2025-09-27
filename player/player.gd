@@ -86,8 +86,7 @@ func _physics_process(delta: float) -> void:
 		global_position += velocity * delta
 	
 	%Sprite.flip_h = velocity.x > 0
-	print(velocity)
-	
+	 
 	var treshold = 200
 	
 	if velocity.y > treshold:
