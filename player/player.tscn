@@ -227,4 +227,9 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_boad6")
 value = 100.0
 show_percentage = false
 
+[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-1251, 83)
+volume_db = 12.0
+
 [connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]

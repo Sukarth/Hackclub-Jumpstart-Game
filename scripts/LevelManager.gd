@@ -80,20 +80,20 @@ var sacrifice_ui: Control = null
 
 func _ready():
 	add_to_group("level_manager")
-	print("🗺 LevelManager ready")
+	print("LevelManager ready")
 	# Connect to GameManager signals if needed
 
 func set_sacrifice_ui(ui_node: Control):
-	print("🗺 LevelManager.set_sacrifice_ui() called with: ", ui_node)
+	print("LevelManager.set_sacrifice_ui() called with: ", ui_node)
 	sacrifice_ui = ui_node
 	if sacrifice_ui:
-		print("  UI node is valid, connecting signals...")
+		print("UI node is valid, connecting signals...")
 		# Connect to sacrifice UI signals
 		sacrifice_ui.sacrifice_made.connect(_on_sacrifice_made)
 		sacrifice_ui.choice_cancelled.connect(_on_sacrifice_cancelled)
-		print("📝 Connected to SacrificeChoice UI - reference stored!")
+		print("Connected to SacrificeChoice UI - reference stored!")
 	else:
-		print("  ⚠️ UI node is null!")
+		print("UI node is null!")
 
 func start_level(level_key: String):
 	if not level_key in levels:
@@ -103,12 +103,12 @@ func start_level(level_key: String):
 	current_level = level_key
 	var level_data = levels[level_key]
 	
-	print("🎆 Starting level: ", level_data.name)
-	print("  Description: ", level_data.description)
+	print("Starting level: ", level_data.name)
+	print("Description: ", level_data.description)
 	
 	# Check if sacrifices are required
 	if level_data.sacrifice_count > 0:
-		print("⚠️ Level requires ", level_data.sacrifice_count, " sacrifice(s)")
+		print("Level requires ", level_data.sacrifice_count, " sacrifice(s)")
 		# Don't auto-trigger sacrifice UI - let level design decide when
 		return true
 	else:
@@ -134,13 +134,13 @@ func trigger_sacrifice_requirement(reason: String = ""):
 			available_sacrifices.append(sacrifice)
 	
 	if available_sacrifices.is_empty():
-		print("⚠️ No available sacrifices left for this level!")
+		print("No available sacrifices left for this level!")
 		# Maybe allow progression anyway or show different message
 		return
 	
-	print("🔮 Triggering sacrifice requirement...")
+	print("Triggering sacrifice requirement...")
 	if reason:
-		print("  Reason: ", reason)
+		print("Reason: ", reason)
 	
 	# Show sacrifice UI if available
 	if sacrifice_ui:
@@ -155,7 +155,7 @@ func trigger_sacrifice_requirement(reason: String = ""):
 		sacrifice_required.emit(level_data.name, available_sacrifices)
 
 func _on_sacrifice_made(_sacrifice_type: String, sacrifice_name: String):
-	print("✨ LevelManager: Sacrifice completed - ", sacrifice_name)
+	print("LevelManager: Sacrifice completed - ", sacrifice_name)
 	
 	# Check if level can now progress
 	var level_data = levels.get(current_level, {})
