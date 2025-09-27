@@ -2,7 +2,7 @@
 extends Area2D
 
 @export var checkpoint_id: String = "checkpoint_1"
-@export var is_level_start: bool = false  # Mark starting checkpoint
+@export var is_level_start: bool = false # Mark starting checkpoint
 @export var show_activation_effect: bool = true
 
 # Visual feedback

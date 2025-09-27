@@ -3,7 +3,7 @@ extends Area2D
 
 @export var next_level_path: String = ""
 @export var level_name: String = "Next Level"
-@export var requires_sacrifice: bool = false  # Must make sacrifice to exit
+@export var requires_sacrifice: bool = false # Must make sacrifice to exit
 @export var required_sacrifice_count: int = 1
 
 # Visual feedback
