@@ -5,47 +5,75 @@ extends Node
 signal level_completed(level_name: String)
 signal sacrifice_required(level_name: String, required_sacrifices: Array[String])
 
-# Level data structure
+# Enhanced Level data structure for "Sacrifices Must Be Made"
 var levels = {
 	"tutorial": {
-		"name": "Tutorial Realm",
-		"description": "Learn the basic controls",
+		"name": "Awakening",
+		"description": "The Custodian awakens in the fading Construct...",
+		"sublevels": ["tutorial_01"],
 		"required_sacrifices": [],
-		"sacrifice_count": 0
+		"sacrifice_count": 0,
+		"shop_available": false,
+		"hazards": [],
+		"lore": "The Construct fractures. Laws bend. You must choose what to sacrifice to reach the Core... but at what cost?",
+		"scene_path": "res://levels/tutorial/"
 	},
 	"stable_realm": {
-		"name": "The Stable Realm",
-		"description": "A peaceful forest - but change approaches...",
+		"name": "The Stable Realm", 
+		"description": "Forest sanctuary where reality still holds firm",
+		"sublevels": ["stable_entrance", "stable_forest", "stable_depths"],
 		"required_sacrifices": ["gravity", "friction", "jump"],
-		"sacrifice_count": 1
+		"sacrifice_count": 1,
+		"shop_available": true,
+		"hazards": [],
+		"lore": "Here, reality still holds firm. But change approaches on the wind...",
+		"scene_path": "res://levels/stable_realm/"
 	},
 	"fractured_heights": {
 		"name": "Fractured Heights",
-		"description": "Floating islands demand different movement...",
-		"required_sacrifices": ["collision", "run", "light"],
-		"sacrifice_count": 1
+		"description": "Vertical cliffs where the sky broke free",
+		"sublevels": ["heights_base", "heights_climb", "heights_floating", "heights_underground"],
+		"required_sacrifices": ["gravity", "collision", "run"],
+		"sacrifice_count": 1,
+		"shop_available": true,
+		"hazards": ["momentum_shards"],
+		"lore": "Sacrificing gravity freed the skies, but doomed the grounded.",
+		"scene_path": "res://levels/fractured_heights/"
 	},
 	"void_labyrinth": {
 		"name": "The Void Labyrinth",
-		"description": "Dark maze where reality bends...",
+		"description": "Dark maze where echoes of choice linger",
+		"sublevels": ["void_entrance", "void_maze_east", "void_maze_west", "void_crystals", "void_depths"],
 		"required_sacrifices": ["gravity", "friction", "collision", "jump", "run"],
-		"sacrifice_count": 2
+		"sacrifice_count": 2,
+		"shop_available": true,
+		"hazards": ["gravity_wells"],
+		"lore": "In darkness, only choice illuminates the path forward.",
+		"scene_path": "res://levels/void_labyrinth/"
 	},
 	"chaos_theory": {
 		"name": "Chaos Theory",
-		"description": "Everything shifts unpredictably...",
+		"description": "Realm where laws writhe and reality shifts",
+		"sublevels": ["chaos_entry", "chaos_shifting", "chaos_storm", "chaos_eye"],
 		"required_sacrifices": ["gravity", "friction", "collision", "jump", "run", "light"],
-		"sacrifice_count": 1
+		"sacrifice_count": 2,
+		"shop_available": true,
+		"hazards": ["momentum_shards", "gravity_wells", "reality_distortions"],
+		"lore": "Order dissolves. Only will remains in the storm of change.",
+		"scene_path": "res://levels/chaos_theory/"
 	},
 	"altar_restoration": {
 		"name": "The Altar of Restoration",
-		"description": "The final sanctuary where all is restored...",
+		"description": "The golden shrine where all choices converge",
+		"sublevels": ["altar_approach", "altar_trials", "altar_core"],
 		"required_sacrifices": [],
-		"sacrifice_count": 0
+		"sacrifice_count": 0,
+		"shop_available": false,
+		"hazards": [],
+		"lore": "Here, all sacrifices converge. What remains of the Custodian?",
+		"scene_path": "res://levels/altar_restoration/"
 	}
-}
-
-# Current progress
+}# Current progress
 var current_level: String = "tutorial"
 var levels_completed: Array[String] = []
 var sacrifice_ui: Control = null
