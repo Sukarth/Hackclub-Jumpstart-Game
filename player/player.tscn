@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://ccuespvssreem"]
+[gd_scene load_steps=31 format=3 uid="uid://ccuespvssreem"]
 
 [ext_resource type="Script" uid="uid://xv8ty6q8ikic" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://crebc6ao1gft2" path="res://player/player_idle.png" id="2_rkbax"]
@@ -191,6 +191,16 @@ animations = [{
 radius = 28.0
 height = 122.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g6k8r"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boad6"]
+bg_color = Color(0.570937, 0.19289556, 0.5595712, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_rkbax")
 
@@ -205,5 +215,16 @@ animation = &"spawn"
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)
 shape = SubResource("CapsuleShape2D_rkbax")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -57.0
+offset_top = -100.0
+offset_right = 57.0
+offset_bottom = -73.0
+theme_override_styles/background = SubResource("StyleBoxFlat_g6k8r")
+theme_override_styles/fill = SubResource("StyleBoxFlat_boad6")
+value = 100.0
+show_percentage = false
 
 [connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]
