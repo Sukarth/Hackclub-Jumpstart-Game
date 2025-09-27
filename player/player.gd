@@ -59,7 +59,7 @@ func _physics_process(delta: float) -> void:
 	
 	if direction:
 		# We use move_toward for basic acceleration/deceleration
-		velocity.x = move_toward(velocity.x, direction * SPEED, SPEED * 2.0 * delta) # Last value is acceleration
+		velocity.x = move_toward(velocity.x, direction * current_speed, current_speed * 2.0 * delta) # Last value is acceleration
 		# Flip the sprite
 		if %Sprite: # Ensure the node exists
 			%Sprite.flip_h = (direction > 0)
