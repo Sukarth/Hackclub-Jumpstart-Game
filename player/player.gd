@@ -3,7 +3,7 @@ extends CharacterBody2D
 # Movement constants
 const BASE_SPEED = 300.0
 const BASE_JUMP_VELOCITY = -600.0
-const SLOW_SPEED = 150.0  # Speed when running is sacrificed
+const SLOW_SPEED = 150.0 # Speed when running is sacrificed
 
 var spawned = false
 
@@ -13,8 +13,7 @@ var original_modulate: Color
 var glitch_tween: Tween
 
 func _ready():
-	%Sprite.play("spawn", -1,true)
-	return
+	%Sprite.play("spawn", -1, true)
 	# Add to player group for trigger detection
 	add_to_group("player")
 	
@@ -38,7 +37,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		# Zero gravity - floating controls with W/S
 		if Input.is_action_pressed("move_up"):
-			velocity.y = -BASE_SPEED * 0.7
+			velocity.y = - BASE_SPEED * 0.7
 		elif Input.is_action_pressed("move_down"):
 			velocity.y = BASE_SPEED * 0.7
 		else:
@@ -67,7 +66,7 @@ func _physics_process(delta: float) -> void:
 	if GameManager.can_run:
 		current_speed = BASE_SPEED
 	else:
-		current_speed = SLOW_SPEED  # Slower when running is sacrificed
+		current_speed = SLOW_SPEED # Slower when running is sacrificed
 	
 	if direction != 0:
 		velocity.x = direction * current_speed
@@ -81,12 +80,27 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, current_speed)
 		else:
 			# Slippery - momentum continues
-			velocity.x *= 0.985  # Very gradual slowdown
+			velocity.x *= 0.985 # Very gradual slowdown
 
 	# === COLLISION SYSTEM ===
 	if GameManager.has_collision:
 		# Normal physics
 		move_and_slide()
+		
+		# === MOVING PLATFORM SUPPORT ===
+		# If player is on floor and the floor is moving, move with it
+		if is_on_floor():
+			for i in get_slide_collision_count():
+				var collision = get_slide_collision(i)
+				var collider = collision.get_collider()
+				# Check if we're standing on a moving platform
+				if collider and collider.has_method("get_velocity"):
+					# Move with the platform
+					global_position += collider.velocity * delta
+				elif collider and collider.get_script() and collider.get_script().resource_path.contains("MovingPlatform"):
+					# For our custom moving platforms, get their movement
+					if collider.has_method("get_platform_velocity"):
+						global_position += collider.get_platform_velocity() * delta
 	else:
 		# Phase through everything
 		global_position += velocity * delta
@@ -101,7 +115,7 @@ func _physics_process(delta: float) -> void:
 		%Sprite.play("jump")
 	elif abs(velocity).x < treshold:
 		%Sprite.play("default")
-	else: 
+	else:
 		%Sprite.play("move")
 
 # Sacrifice reaction functions
@@ -163,6 +177,19 @@ func start_glitch_effect():
 	glitch_tween.set_loops()
 	glitch_tween.tween_callback(_do_glitch).set_delay(0.3)
 
+# Knockback system for hazards (boulders, enemies, etc.)
+func apply_knockback(force: Vector2):
+	"""Apply knockback force to player"""
+	print("💥 Player knocked back with force: ", force)
+	velocity += force
+	
+	# Optional: Brief invincibility or stun
+	# Add visual feedback
+	if sprite:
+		var flash_tween = create_tween()
+		flash_tween.tween_property(sprite, "modulate", Color.RED, 0.1)
+		flash_tween.tween_property(sprite, "modulate", Color.WHITE, 0.1)
+
 func _do_glitch():
 	if not sprite or GameManager.has_collision:
 		return
@@ -170,7 +197,7 @@ func _do_glitch():
 	# Random position offset
 	var original_pos = sprite.position
 	var glitch_offset = Vector2(
-		randf_range(-4, 4), 
+		randf_range(-4, 4),
 		randf_range(-4, 4)
 	)
 	
@@ -179,7 +206,7 @@ func _do_glitch():
 	await get_tree().create_timer(0.05).timeout
 	sprite.position = original_pos
 
-func _input(event):
+func _input(_event):
 	var sacrifice_ui = get_tree().get_first_node_in_group("sacrifice_ui")
 	if sacrifice_ui and sacrifice_ui.visible:
 		return

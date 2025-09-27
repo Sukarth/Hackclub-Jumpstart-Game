@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvv8s7gojhxdm"]
+
+[ext_resource type="Script" path="res://scripts/DeathBorder.gd" id="1_0a8x2"]
+
+[node name="DeathBorder" type="Area2D"]
+script = ExtResource("1_0a8x2")
+border_name = "death_border"
+show_debug_outline = false
+death_message = "You fell out of bounds!"
+respawn_delay = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_player_entered"]
+[connection signal="body_exited" from="." to="." method="_on_player_exited"]

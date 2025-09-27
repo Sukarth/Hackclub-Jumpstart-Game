@@ -154,7 +154,7 @@ func trigger_sacrifice_requirement(reason: String = ""):
 		# Emit signal for manual handling
 		sacrifice_required.emit(level_data.name, available_sacrifices)
 
-func _on_sacrifice_made(sacrifice_type: String, sacrifice_name: String):
+func _on_sacrifice_made(_sacrifice_type: String, sacrifice_name: String):
 	print("✨ LevelManager: Sacrifice completed - ", sacrifice_name)
 	
 	# Check if level can now progress

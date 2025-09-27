@@ -34,7 +34,7 @@ func _ready():
 		if not sacrifice_ui:
 			print("  Missing: SacrificeChoice UI")
 
-func _input(event):
+func _input(_event):
 	# Fallback debug trigger if LevelManager doesn't handle it
 	#if event.is_action_pressed("trigger_sacrifice"):
 	#	debug_trigger_sacrifice_fallback()
