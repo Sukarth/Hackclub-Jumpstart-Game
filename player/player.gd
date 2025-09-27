@@ -114,8 +114,6 @@ func _physics_process(delta: float) -> void:
 		if velocity.y == 0 && !%AudioPlayer.playing:
 			%AudioPlayer.stream = walking_sfx
 			%AudioPlayer.play()
-			print("Should be playing")
-		
 
 # Sacrifice reaction functions
 func _on_physics_sacrificed(law_type: String):
