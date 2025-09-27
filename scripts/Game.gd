@@ -36,8 +36,9 @@ func _ready():
 
 func _input(event):
 	# Fallback debug trigger if LevelManager doesn't handle it
-	if event.is_action_pressed("trigger_sacrifice"):
-		debug_trigger_sacrifice_fallback()
+	#if event.is_action_pressed("trigger_sacrifice"):
+	#	debug_trigger_sacrifice_fallback()
+	pass
 
 func debug_trigger_sacrifice_fallback():
 	"""Fallback function to trigger sacrifice UI from Game level"""

@@ -75,7 +75,7 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, current_speed)
 		else:
 			# Slippery - momentum continues
-			velocity.x *= 0.95  # Very gradual slowdown
+			velocity.x *= 0.98  # Very gradual slowdown
 
 	# === COLLISION SYSTEM ===
 	if GameManager.has_collision:
@@ -86,9 +86,8 @@ func _physics_process(delta: float) -> void:
 		global_position += velocity * delta
 	
 	%Sprite.flip_h = velocity.x > 0
-	print(velocity)
-	
-	var treshold = 100
+	 
+	var treshold = 200
 	
 	if velocity.y > treshold:
 		%Sprite.play("fall")
