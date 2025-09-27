@@ -53,7 +53,7 @@ func _physics_process(delta: float) -> void:
 	var direction := 0.0
 	if Input.is_action_pressed("move_left"):
 		direction -= 1.0
-	if Input.is_key_pressed(KEY_D):
+	if Input.is_action_pressed("move_right"):
 		direction += 1.0
 	
 	var current_speed: float
@@ -84,15 +84,17 @@ func _physics_process(delta: float) -> void:
 	else:
 		# Phase through everything
 		global_position += velocity * delta
-	print(velocity)
 	
 	%Sprite.flip_h = velocity.x > 0
+	print(velocity)
 	
-	if abs(velocity).x < 0.1:
-		%Sprite.play("default")
-	elif velocity.y > 0.1:
-		%Sprite.play("default")
-	elif velocity.y > 0.1:
+	var treshold = 100
+	
+	if velocity.y > treshold:
+		%Sprite.play("fall")
+	elif velocity.y < -treshold:
+		%Sprite.play("jump")
+	elif abs(velocity).x < treshold:
 		%Sprite.play("default")
 	else: 
 		%Sprite.play("move")
@@ -176,12 +178,3 @@ func _input(event):
 	var sacrifice_ui = get_tree().get_first_node_in_group("sacrifice_ui")
 	if sacrifice_ui and sacrifice_ui.visible:
 		return
-		
-	if Input.is_key_pressed(KEY_TAB):
-		print("🔍 DEBUG - Current sacrifices:")
-		print("  Gravity: ", not GameManager.has_gravity)
-		print("  Friction: ", not GameManager.has_friction)
-		print("  Collision: ", not GameManager.has_collision)
-		print("  Jump: ", not GameManager.can_jump)
-		print("  Run: ", not GameManager.can_run)
-		print("  Total sacrifices: ", GameManager.get_sacrifice_count())
