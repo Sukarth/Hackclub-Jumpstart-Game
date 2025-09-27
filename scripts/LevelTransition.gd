@@ -19,4 +19,4 @@ func _on_player_entered(body):
 		else:
 			print("🎉 Game Complete! No next level set.")
 			# Show win screen or restart
-			get_tree().change_scene_to_file("res://game.tscn")  # Go back to main scene
+			get_tree().change_scene_to_file("res://game.tscn") # Go back to main scene

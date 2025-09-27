@@ -19,7 +19,7 @@ var levels = {
 		"scene_path": "res://levels/tutorial/"
 	},
 	"stable_realm": {
-		"name": "The Stable Realm", 
+		"name": "The Stable Realm",
 		"description": "Forest sanctuary where reality still holds firm",
 		"sublevels": ["stable_entrance", "stable_forest", "stable_depths"],
 		"required_sacrifices": ["gravity", "friction", "jump"],
@@ -73,7 +73,7 @@ var levels = {
 		"lore": "Here, all sacrifices converge. What remains of the Custodian?",
 		"scene_path": "res://levels/altar_restoration/"
 	}
-}# Current progress
+} # Current progress
 var current_level: String = "tutorial"
 var levels_completed: Array[String] = []
 var sacrifice_ui: Control = null

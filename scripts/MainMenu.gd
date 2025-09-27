@@ -20,5 +20,5 @@ func _on_quit_pressed():
 
 # Handle keyboard input
 func _input(event):
-	if event.is_action_pressed("jump"):  # Space bar to start
+	if event.is_action_pressed("jump"): # Space bar to start
 		_on_start_pressed()

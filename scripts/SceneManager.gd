@@ -94,7 +94,7 @@ func create_level_directories():
 			dir.make_dir("levels")
 		
 		# Create subdirectories for each level
-		var level_names = ["tutorial", "stable_realm", "fractured_heights", 
+		var level_names = ["tutorial", "stable_realm", "fractured_heights",
 						  "void_labyrinth", "chaos_theory", "altar_restoration"]
 		
 		for level_name in level_names:
