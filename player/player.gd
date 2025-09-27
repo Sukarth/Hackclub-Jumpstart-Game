@@ -19,8 +19,6 @@ func _ready():
 	GameManager.physics_sacrificed.connect(_on_physics_sacrificed)
 	GameManager.ability_sacrificed.connect(_on_ability_sacrificed)
 	GameManager.visual_sacrificed.connect(_on_visual_sacrificed)
-	
-	print("🎮 Player ready! Use WASD + Space to move")
 
 func _physics_process(delta: float) -> void:
 	# === GRAVITY SYSTEM ===
@@ -30,16 +28,16 @@ func _physics_process(delta: float) -> void:
 			velocity += get_gravity() * delta
 	else:
 		# Zero gravity - floating controls with W/S
-		if Input.is_key_pressed(KEY_W):
+		if Input.is_action_pressed("move_up"):
 			velocity.y = -BASE_SPEED * 0.7
-		elif Input.is_key_pressed(KEY_S):
+		elif Input.is_action_pressed("move_down"):
 			velocity.y = BASE_SPEED * 0.7
 		else:
 			# Gradual stop in zero-g
 			velocity.y = move_toward(velocity.y, 0, BASE_SPEED * 2 * delta)
 
 	# === JUMPING SYSTEM ===
-	if Input.is_key_pressed(KEY_SPACE) and GameManager.can_jump:
+	if Input.is_action_pressed("jump") and GameManager.can_jump:
 		if GameManager.has_gravity:
 			# Normal jump (only on ground)
 			if is_on_floor():
@@ -50,9 +48,9 @@ func _physics_process(delta: float) -> void:
 
 	# === MOVEMENT SYSTEM ===
 	var direction := 0.0
-	if Input.is_key_pressed(KEY_A):
+	if Input.is_action_pressed("move_left"):
 		direction -= 1.0
-	if Input.is_key_pressed(KEY_D):
+	if Input.is_action_pressed("move_right"):
 		direction += 1.0
 	
 	var current_speed: float
@@ -159,14 +157,12 @@ func _do_glitch():
 	await get_tree().create_timer(0.05).timeout
 	sprite.position = original_pos
 
-# Debug info only (no more sacrifice keys!)
 func _input(event):
-	# Check if sacrifice UI is open - don't process game inputs if it is
 	var sacrifice_ui = get_tree().get_first_node_in_group("sacrifice_ui")
 	if sacrifice_ui and sacrifice_ui.visible:
 		return
 		
-	if Input.is_key_pressed(KEY_TAB):
+	if event.is_action("debug"):
 		print("🔍 DEBUG - Current sacrifices:")
 		print("  Gravity: ", not GameManager.has_gravity)
 		print("  Friction: ", not GameManager.has_friction)

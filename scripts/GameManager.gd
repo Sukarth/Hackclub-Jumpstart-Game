@@ -100,13 +100,3 @@ func reset_all_sacrifices():
 	current_level = 1
 	sacrifices_made.clear()
 	print("🔄 All sacrifices reset")
-
-# Debug function for testing
-func _input(event):
-	# Temporary test controls (remove later)
-	if event.is_action_pressed("ui_select"): # Enter/Space
-		sacrifice_physics_law("gravity")
-	elif event.is_action_pressed("ui_cancel"): # Escape
-		sacrifice_physics_law("friction")
-	elif Input.is_action_just_pressed("ui_right") and event.is_pressed():
-		sacrifice_ability("jump")
