@@ -2,8 +2,10 @@ extends CharacterBody2D
 
 # Movement constants
 const BASE_SPEED = 300.0
-const BASE_JUMP_VELOCITY = -800.0
-const SLOW_SPEED = 100.0  # Speed when running is sacrificed
+const BASE_JUMP_VELOCITY = -600.0
+const SLOW_SPEED = 150.0  # Speed when running is sacrificed
+
+var spawned = false
 
 # Visual feedback
 @onready var sprite = $Sprite2D if has_node("Sprite2D") else null
@@ -11,6 +13,8 @@ var original_modulate: Color
 var glitch_tween: Tween
 
 func _ready():
+	%Sprite.play("spawn", -1,true)
+	return
 	# Add to player group for trigger detection
 	add_to_group("player")
 	
@@ -24,6 +28,8 @@ func _ready():
 	GameManager.visual_sacrificed.connect(_on_visual_sacrificed)
 
 func _physics_process(delta: float) -> void:
+	if !spawned:
+		return
 	# === GRAVITY SYSTEM ===
 	if GameManager.has_gravity:
 		# Normal gravity
@@ -75,7 +81,7 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, current_speed)
 		else:
 			# Slippery - momentum continues
-			velocity.x *= 0.98  # Very gradual slowdown
+			velocity.x *= 0.985  # Very gradual slowdown
 
 	# === COLLISION SYSTEM ===
 	if GameManager.has_collision:
@@ -129,7 +135,7 @@ func _on_ability_sacrificed(ability_type: String):
 				sprite.modulate = sprite.modulate.darkened(0.5)
 			print("🕳️ Player: The world grows darker!")
 
-func _on_visual_sacrificed(visual_type: String):
+func _on_visual_sacrificed(_visual_type: String):
 	if sprite:
 		# Increase visual corruption
 		sprite.modulate = sprite.modulate.lerp(Color.RED, 0.2)
@@ -177,3 +183,7 @@ func _input(event):
 	var sacrifice_ui = get_tree().get_first_node_in_group("sacrifice_ui")
 	if sacrifice_ui and sacrifice_ui.visible:
 		return
+
+
+func _on_sprite_animation_finished() -> void:
+	spawned = true

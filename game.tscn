@@ -38,13 +38,15 @@ tile_map_data = PackedByteArray("AAAAAAcAAQABAAIAAAABAAcAAQABAAIAAAACAAcAAQABAAI
 tile_set = SubResource("TileSet_7jktm")
 
 [node name="Player" parent="." instance=ExtResource("2_feb5d")]
-position = Vector2(507, 111)
+position = Vector2(482, 499)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="SacrificeChoice" parent="CanvasLayer" instance=ExtResource("3_fc0e3")]
+visible = false
 
 [node name="LevelManager" type="Node" parent="."]
 script = ExtResource("4_7jktm")
