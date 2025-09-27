@@ -15,6 +15,14 @@ run/main_scene="uid://yele7q4tlin3"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*res://scripts/GameManager.gd"
+
+[editor]
+
+version_control/autoload_on_startup=true
+
 [input]
 
 move_left={
