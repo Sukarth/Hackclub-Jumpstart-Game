@@ -1,4 +1,3 @@
-# MovingPlatformSmooth.gd - Smooth moving platform with player riding support
 extends AnimatableBody2D
 
 @export var move_distance: float = 200.0
