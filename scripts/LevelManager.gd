@@ -212,9 +212,10 @@ func get_progress_summary() -> Dictionary:
 # Debug functions
 func _input(event):
 	# Temporary test controls (remove later)
+	print("EVENT")
 	if event.is_action_pressed("trigger_sacrifice"): # Down Arrow
 		print("🔮 [DEBUG] Triggering sacrifice requirement")
-		debug_trigger_sacrifice()
+		trigger_sacrifice_requirement()
 	
 	elif event.is_action_pressed("show_progress"): # Up Arrow
 		print("📊 [DEBUG] Progress summary:")
