@@ -64,3 +64,8 @@ func show_error_message(message: String):
 	"""Show error message to player"""
 	print("❌ Error: ", message)
 	# You could add a popup dialog here if needed
+
+
+func _on_github_button_pressed() -> void:
+	OS.shell_open("https://github.com/Sukarth/Hackclub-Jumpstart-Game")
+	pass # Replace with function body.

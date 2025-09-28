@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://fdr1rpk4bp1t"]
+[gd_scene load_steps=8 format=3 uid="uid://fdr1rpk4bp1t"]
 
 [ext_resource type="Script" uid="uid://chl2jix5td472" path="res://scripts/MainMenu.gd" id="1_06t4h"]
 [ext_resource type="Texture2D" uid="uid://wivhujwldiv6" path="res://res/background.png" id="2_7vrkn"]
 [ext_resource type="AudioStream" uid="uid://b17fc45ywxq28" path="res://sfx/button_click.mp3" id="3_fu7sn"]
+[ext_resource type="Texture2D" uid="uid://cr7dhjl3polq5" path="res://icons/github-mark-white.svg" id="4_jix8l"]
 
 [sub_resource type="Animation" id="Animation_7vrkn"]
 length = 0.001
@@ -128,8 +129,21 @@ libraries = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_fu7sn")
 
+[node name="GithubButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 1712.0
+offset_top = 933.0
+offset_right = 1810.0
+offset_bottom = 1029.0
+texture_normal = ExtResource("4_jix8l")
+texture_pressed = ExtResource("4_jix8l")
+texture_hover = ExtResource("4_jix8l")
+texture_disabled = ExtResource("4_jix8l")
+texture_focused = ExtResource("4_jix8l")
+
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_pressed"]
 [connection signal="animation_finished" from="FadeBox/FadeAnimator" to="." method="_on_fade_animator_animation_finished"]
+[connection signal="pressed" from="GithubButton" to="." method="_on_github_button_pressed"]
