@@ -1,13 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://donvyavjjf6es"]
+[gd_scene load_steps=5 format=3 uid="uid://btpj12mqymrqr"]
 
-[ext_resource type="Script" uid="uid://c03ieai7oi2mc" path="res://scripts/CrumblingPlatform.gd" id="1_5c3d2"]
+[ext_resource type="Script" path="res://scripts/CrumblingPlatform.gd" id="1_5c3d2"]
 [ext_resource type="TileSet" uid="uid://bxhdhpgj504xn" path="res://main_tileset.tres" id="2_scony"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_platform"]
 size = Vector2(96, 17)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_detection"]
-size = Vector2(96, 17)
+size = Vector2(96, 19)
 
 [node name="CrumblingPlatform" type="StaticBody2D"]
 script = ExtResource("1_5c3d2")
@@ -24,7 +24,7 @@ shape = SubResource("RectangleShape2D_platform")
 [node name="DetectionArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-position = Vector2(0, 7.5)
+position = Vector2(0, 6.5)
 shape = SubResource("RectangleShape2D_detection")
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_player_entered"]

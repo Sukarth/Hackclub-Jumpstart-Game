@@ -10,12 +10,12 @@
 [ext_resource type="PackedScene" path="res://DeathBorder.tscn" id="8_v0ve5"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_v0ve5"]
-distance = -1024.0
+distance = -1725.5947
 
 [node name="LevelTemplate2" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_vgt4e")]
-position = Vector2(54, 75)
+position = Vector2(39338, 2532)
 scale = Vector2(2, 2)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]

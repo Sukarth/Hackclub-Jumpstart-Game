@@ -34,7 +34,7 @@ func _physics_process(delta: float) -> void:
 	# === GRAVITY SYSTEM ===
 	if GameManager.has_gravity:
 		# Normal gravity
-		if not is_on_floor():
+		if not is_enough_floor():
 			velocity += get_gravity() * delta
 	else:
 		# Zero gravity - floating controls with W/S
@@ -50,7 +50,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("jump") and GameManager.can_jump:
 		if GameManager.has_gravity:
 			# Normal jump (only on ground)
-			if is_on_floor():
+			if is_enough_floor():
 				velocity.y = BASE_JUMP_VELOCITY
 		else:
 			# Zero-g "push" (can use anywhere)
@@ -91,7 +91,7 @@ func _physics_process(delta: float) -> void:
 		
 		# === MOVING PLATFORM SUPPORT ===
 		# If player is on floor and the floor is moving, move with it
-		if is_on_floor():
+		if is_enough_floor():
 			for i in get_slide_collision_count():
 				var collision = get_slide_collision(i)
 				var collider = collision.get_collider()
@@ -129,6 +129,8 @@ func _physics_process(delta: float) -> void:
 			%AudioPlayer.stream = walking_sfx
 			%AudioPlayer.play()
 
+func is_enough_floor():
+	return %RayCast2D.is_colliding()
 # Sacrifice reaction functions
 func _on_physics_sacrificed(law_type: String):
 	if not sprite:

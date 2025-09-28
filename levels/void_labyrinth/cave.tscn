@@ -5,14 +5,15 @@
 [ext_resource type="PackedScene" path="res://Checkpoint.tscn" id="3_kcrvw"]
 [ext_resource type="PackedScene" uid="uid://dkpf7u1wwylm1" path="res://ui/SacrificeChoice.tscn" id="4_kig2u"]
 [ext_resource type="PackedScene" path="res://MovingPlatformCave.tscn" id="5_um44m"]
-[ext_resource type="PackedScene" path="res://CrumblingPlatform.tscn" id="6_kcrvw"]
+[ext_resource type="PackedScene" uid="uid://btpj12mqymrqr" path="res://CrumblingPlatform.tscn" id="6_kcrvw"]
 [ext_resource type="PackedScene" path="res://LevelExit.tscn" id="7_kig2u"]
 [ext_resource type="Texture2D" uid="uid://o70xmklff2ec" path="res://res/tiles/cave/basic.png" id="8_cttvr"]
 
 [node name="LevelTemplate" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_fq0ls")]
-position = Vector2(1, -63)
+position = Vector2(16500, -3013)
+collision_layer = 3
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
@@ -99,42 +100,55 @@ move_speed = 8.0
 texture_filter = 1
 position = Vector2(11148, -1364)
 scale = Vector2(4, 4)
+collision_layer = 3
 
 [node name="CrumblingPlatform8" parent="." instance=ExtResource("6_kcrvw")]
 texture_filter = 1
 position = Vector2(11614, -1678)
 scale = Vector2(4, 4)
+collision_layer = 3
 
 [node name="CrumblingPlatform2" parent="." instance=ExtResource("6_kcrvw")]
 texture_filter = 1
 position = Vector2(12052, -2049)
 scale = Vector2(4, 4)
+collision_layer = 3
 
 [node name="MovingPlatform8" parent="." instance=ExtResource("5_um44m")]
 texture_filter = 1
-position = Vector2(13927, -2458)
+position = Vector2(13782, -2406)
 scale = Vector2(4, 4)
 move_speed = 8.0
 
 [node name="CrumblingPlatform3" parent="." instance=ExtResource("6_kcrvw")]
 texture_filter = 1
-position = Vector2(13376, -2008)
+position = Vector2(13282, -2143)
 scale = Vector2(4, 4)
+collision_layer = 3
+
+[node name="CrumblingPlatform9" parent="." instance=ExtResource("6_kcrvw")]
+texture_filter = 1
+position = Vector2(14462, -2535)
+scale = Vector2(4, 4)
+collision_layer = 3
 
 [node name="CrumblingPlatform4" parent="." instance=ExtResource("6_kcrvw")]
 texture_filter = 1
 position = Vector2(12420, -2356)
 scale = Vector2(4, 4)
+collision_layer = 3
 
 [node name="CrumblingPlatform5" parent="." instance=ExtResource("6_kcrvw")]
 texture_filter = 1
 position = Vector2(16896, -2816)
 scale = Vector2(4, 4)
+collision_layer = 3
 
 [node name="CrumblingPlatform6" parent="." instance=ExtResource("6_kcrvw")]
 texture_filter = 1
 position = Vector2(16512, -2816)
 scale = Vector2(4, 4)
+collision_layer = 3
 
 [node name="Checkpoint3" parent="." instance=ExtResource("3_kcrvw")]
 position = Vector2(14960, -2860)

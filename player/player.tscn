@@ -231,4 +231,9 @@ unique_name_in_owner = true
 position = Vector2(-1251, 83)
 volume_db = 12.0
 
+[node name="RayCast2D" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-12, 1)
+target_position = Vector2(0, 102)
+
 [connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]
