@@ -13,7 +13,7 @@ var has_triggered: bool = false
 var level_manager: Node = null
 
 func _ready():
-	# Connect area signals
+	# Connect area signal
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 	
@@ -23,7 +23,9 @@ func _ready():
 		print("Warning: SacrificeTrigger couldn't find LevelManager")
 	
 	print("⚡ SacrificeTrigger ready: '", trigger_message, "'")
-
+	
+	trigger_sacrifice_requirement()
+	
 func _on_body_entered(body: Node2D):
 	# Check if it's the player
 	if not body.is_in_group("player"):
