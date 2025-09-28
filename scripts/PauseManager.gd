@@ -6,7 +6,7 @@ const MAIN_MENU_PATH = "res://main_menu.tscn"
 var pause_menu_scene = preload("res://PauseMenu.tscn")
 var pause_menu_instance = null
 var is_paused = false
-var can_pause = true  # Disable in main menu
+var can_pause = true # Disable in main menu
 
 func _ready():
 	# Set process mode to always run even when paused
@@ -15,7 +15,7 @@ func _ready():
 
 func _input(event):
 	# Only handle pause in game scenes (not in main menu or credits)
-	if event.is_action_pressed("ui_cancel") and can_pause:  # ESC key
+	if event.is_action_pressed("ui_cancel") and can_pause: # ESC key
 		toggle_pause()
 
 func toggle_pause():
@@ -52,7 +52,7 @@ func resume_game():
 func create_pause_menu():
 	"""Create and display the pause menu"""
 	if pause_menu_instance:
-		return  # Already exists
+		return # Already exists
 	
 	# Create pause menu instance
 	pause_menu_instance = pause_menu_scene.instantiate()
@@ -67,7 +67,7 @@ func create_pause_menu():
 	
 	# Create a CanvasLayer to ensure the pause menu appears on top
 	var canvas_layer = CanvasLayer.new()
-	canvas_layer.layer = 100  # High layer to appear on top
+	canvas_layer.layer = 100 # High layer to appear on top
 	canvas_layer.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	
 	# Add pause menu to canvas layer, then canvas layer to scene
@@ -90,7 +90,7 @@ func _on_resume_requested():
 func _on_main_menu_requested():
 	"""Handle main menu button press"""
 	print("🏠 Returning to main menu...")
-	get_tree().paused = false  # Unpause before changing scene
+	get_tree().paused = false # Unpause before changing scene
 	remove_pause_menu()
 	change_scene_safely(MAIN_MENU_PATH)
 
@@ -120,7 +120,7 @@ func _on_scene_changed():
 		if "main_menu" in scene_name or "credits" in scene_name:
 			can_pause = false
 			if is_paused:
-				resume_game()  # Force resume if we were paused
+				resume_game() # Force resume if we were paused
 		else:
 			can_pause = true
 		
@@ -142,4 +142,4 @@ func _process(_delta):
 		if can_pause != should_allow_pause:
 			can_pause = should_allow_pause
 			if not can_pause and is_paused:
-				resume_game()  # Force resume in menu scenes
+				resume_game() # Force resume in menu scenes
