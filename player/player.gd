@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
 # Movement constants
-const BASE_SPEED = 500.0
-const BASE_JUMP_VELOCITY = -600.0
-const SLOW_SPEED = 250.0 # Speed when running is sacrificed
+const BASE_SPEED = 1000.0
+const BASE_JUMP_VELOCITY = -1000.0
+const SLOW_SPEED = 500.0 # Speed when running is sacrificed
 
 var spawned = false
 
