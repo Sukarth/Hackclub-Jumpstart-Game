@@ -41,8 +41,17 @@ func trigger_level_complete():
 	await get_tree().create_timer(1.0).timeout
 	
 	if next_level_path != "":
-		# Load next level with fade transition
-		await TransitionManager.transition_to_scene(next_level_path, "Loading Next Level...")
+		# Check if LoreManager exists (may need project restart)
+		if has_node("/root/LoreManager"):
+			# Get lore for the next level
+			var lore_manager = get_node("/root/LoreManager")
+			var lore = lore_manager.get_lore_for_scene(next_level_path)
+			
+			# Load next level with lore transition
+			await TransitionManager.transition_with_lore(next_level_path, lore.title, lore.text)
+		else:
+			print("📖 LoreManager not found, using regular transition")
+			await TransitionManager.transition_to_scene(next_level_path, "Loading Next Level...")
 	else:
 		# No next level - game complete or return to menu
 		print("🏆 Game Complete!")
