@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="sacrifices must be made"
-run/main_scene="uid://yele7q4tlin3"
+run/main_scene="uid://fdr1rpk4bp1t"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 
 GameManager="*res://scripts/GameManager.gd"
 CheckpointManager="*res://scripts/CheckpointManager.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 
 [editor]
 
