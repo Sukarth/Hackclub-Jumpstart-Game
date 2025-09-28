@@ -15,7 +15,7 @@ distance = -1725.5947
 [node name="LevelTemplate2" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_vgt4e")]
-position = Vector2(35420, 1764)
+position = Vector2(-992, 50)
 scale = Vector2(2, 2)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
