@@ -10,26 +10,7 @@ var spawned = false
 var walking_sfx = load("res://sfx/walking.wav")
 
 # Deadly tile detection system - Using source_id and atlas coordinates
-var deadly_tiles = [
-	
-	{"source": 7, "atlas": Vector2i(0, 0)},
-	
-	{"source": 4, "atlas": Vector2i(3, 0)},
-	{"source": 4, "atlas": Vector2i(3, 1)},
-	{"source": 4, "atlas": Vector2i(4, 1)},
-	{"source": 4, "atlas": Vector2i(4, 2)},
 
-	{"source": 8, "atlas": Vector2i(5, 3)},
-	{"source": 8, "atlas": Vector2i(1, 3)},
-	{"source": 8, "atlas": Vector2i(8, 2)},
-	{"source": 8, "atlas": Vector2i(8, 1)},
-	{"source": 8, "atlas": Vector2i(8, 3)},
-	
-	{"source": 11, "atlas": Vector2i(8, 2)},
-	{"source": 11, "atlas": Vector2i(8, 1)},
-	{"source": 11, "atlas": Vector2i(8, 3)},
-	{"source": 11, "atlas": Vector2i(5, 3)},
-]
 var tile_check_timer = 0.0
 const TILE_CHECK_INTERVAL = 0.1 # Check every 0.1 seconds for performance
 var debug_tiles = true # Set to false to stop tile coordinate spam
@@ -57,10 +38,6 @@ func _ready():
 	call_deferred("setup_tilemap_groups")
 
 func _physics_process(delta: float) -> void:
-	if !spawned:
-		if debug_tiles:
-			print("⏸️ Player not spawned yet, skipping physics")
-		return
 	# === GRAVITY SYSTEM ===
 	if GameManager.has_gravity:
 		# Normal gravity
@@ -165,27 +142,10 @@ func _physics_process(delta: float) -> void:
 func is_enough_floor():
 	return %RayCast2D.is_colliding()
 
-func check_deadly_tiles(delta: float):
-	"""Check if player is touching any deadly tiles and kill them if so"""
-	tile_check_timer += delta
-	if tile_check_timer < TILE_CHECK_INTERVAL:
-		return
-	tile_check_timer = 0.0
-	
-	# Get all TileMap nodes in the scene
-	var tilemaps = get_tree().get_nodes_in_group("tilemap")
-	if tilemaps.is_empty():
-		# Fallback: find TileMap nodes manually
-		tilemaps = []
-		var root = get_tree().current_scene
-		_find_tilemaps_recursive(root, tilemaps)
-	
-	# Check each tilemap
-	for tilemap in tilemaps:
-		if tilemap is TileMap:
-			if is_on_deadly_tile(tilemap, global_position):
-				die_from_deadly_tile()
-				return
+func check_deadly_tiles(_delta: float):
+	if $DeathArea.get_overlapping_bodies().size():
+		print("DEATH")
+		die_from_deadly_tile()
 
 func _find_tilemaps_recursive(node: Node, tilemap_list: Array):
 	"""Recursively find all TileMap nodes"""
@@ -195,48 +155,6 @@ func _find_tilemaps_recursive(node: Node, tilemap_list: Array):
 	for child in node.get_children():
 		_find_tilemaps_recursive(child, tilemap_list)
 
-func is_on_deadly_tile(tilemap: TileMap, world_pos: Vector2) -> bool:
-	"""Check if the player is on a deadly tile"""
-	
-	# Check multiple points around the player (center, feet, corners)
-	var check_offsets = [
-		Vector2(0, 0), # Center
-		Vector2(0, 8), # Feet
-		Vector2(-8, 8), # Bottom left
-		Vector2(8, 8), # Bottom right
-		Vector2(-8, 0), # Left
-		Vector2(8, 0), # Right
-	]
-	
-	var found_any_tile = false
-	
-	for offset in check_offsets:
-		var check_world_pos = world_pos + offset
-		var local_pos = tilemap.to_local(check_world_pos)
-		var tile_pos = tilemap.local_to_map(local_pos)
-		
-		var source_id = tilemap.get_cell_source_id(0, tile_pos)
-		if source_id == -1:
-			continue
-			
-		found_any_tile = true
-		var atlas_coords = tilemap.get_cell_atlas_coords(0, tile_pos)
-		
-		# DEBUG: Only print when we find tiles (reduce spam)
-		if debug_tiles:
-			print("� Found tile - {\"source\": ", source_id, ", \"atlas\": Vector2i(", atlas_coords.x, ", ", atlas_coords.y, ")},")
-		
-		# Check if this tile is deadly
-		for deadly_tile in deadly_tiles:
-			if deadly_tile.source == source_id and deadly_tile.atlas == atlas_coords:
-				print("💀 DEADLY TILE DETECTED! Source: ", source_id, " Atlas: ", atlas_coords)
-				return true
-	
-	# Only print "empty space" occasionally to avoid spam
-	if debug_tiles and not found_any_tile and randf() < 0.1: # Only 10% of the time
-		print("🌌 Player in empty space (no tiles found in area)")
-	
-	return false
 
 func die_from_deadly_tile():
 	"""Kill the player and respawn at last checkpoint"""
@@ -266,33 +184,6 @@ func setup_tilemap_groups():
 			tilemap.add_to_group("tilemap")
 	
 	print("🗺️ Found and grouped ", tilemaps.size(), " tilemaps for deadly tile detection")
-
-func add_deadly_tile(source_id: int, atlas_coords: Vector2i):
-	"""Add a tile to the deadly tiles list"""
-	var new_tile = {"source": source_id, "atlas": atlas_coords}
-	
-	# Check if already exists
-	for tile in deadly_tiles:
-		if tile.source == source_id and tile.atlas == atlas_coords:
-			print("⚠️ Deadly tile already exists: Source ", source_id, " Atlas ", atlas_coords)
-			return
-	
-	deadly_tiles.append(new_tile)
-	print("💀 Added deadly tile: Source ", source_id, " Atlas ", atlas_coords)
-
-func remove_deadly_tile(source_id: int, atlas_coords: Vector2i):
-	"""Remove a tile from the deadly tiles list"""
-	for i in range(deadly_tiles.size() - 1, -1, -1):
-		var tile = deadly_tiles[i]
-		if tile.source == source_id and tile.atlas == atlas_coords:
-			deadly_tiles.remove_at(i)
-			print("✅ Removed deadly tile: Source ", source_id, " Atlas ", atlas_coords)
-			return
-	print("⚠️ Deadly tile not found: Source ", source_id, " Atlas ", atlas_coords)
-
-func get_deadly_tiles() -> Array:
-	"""Get the current list of deadly tiles"""
-	return deadly_tiles.duplicate()
 
 # Sacrifice reaction functions
 func _on_physics_sacrificed(law_type: String):
