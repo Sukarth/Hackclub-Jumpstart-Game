@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5x8nan2p4kqt"]
+
+[ext_resource type="Script" path="res://scripts/ShrinkPowerup.gd" id="1_shrink"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_shrink"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_shrink"]
+radius = 25.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_particles"]
+
+[node name="ShrinkPowerup" type="Area2D"]
+script = ExtResource("1_shrink")
+shrink_factor = 0.5
+shrink_duration = 10.0
+shrink_speed = 2.0
+respawn_time = 5.0
+one_time_use = false
+visual_feedback = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(25, 25)
+texture = SubResource("CanvasTexture_shrink")
+modulate = Color(0.3, 0.8, 1, 0.8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_shrink")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = true
+amount = 20
+lifetime = 1.5
+texture = SubResource("CanvasTexture_particles")
+emission_shape = 1
+emission_sphere_radius = 20.0
+direction = Vector2(0, -1)
+spread = 30.0
+initial_velocity_min = 30.0
+initial_velocity_max = 60.0
+gravity = Vector2(0, -50)
+scale_amount_min = 0.3
+scale_amount_max = 0.8
+color = Color(0.5, 0.9, 1, 0.6)
+
+[connection signal="body_entered" from="." to="." method="_on_player_entered"]

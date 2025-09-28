@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://g4lg4bxhhdvf"]
+[gd_scene load_steps=9 format=3 uid="uid://g4lg4bxhhdvf"]
 
 [ext_resource type="PackedScene" uid="uid://ccuespvssreem" path="res://player/player.tscn" id="1_fq0ls"]
 [ext_resource type="TileSet" uid="uid://bxhdhpgj504xn" path="res://main_tileset.tres" id="2_um44m"]
@@ -7,11 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://d4bomst41fl0i" path="res://MovingPlatformCave.tscn" id="5_um44m"]
 [ext_resource type="PackedScene" uid="uid://donvyavjjf6es" path="res://CrumblingPlatform.tscn" id="6_kcrvw"]
 [ext_resource type="PackedScene" uid="uid://dualpgyixyf1r" path="res://LevelExit.tscn" id="7_kig2u"]
+[ext_resource type="PackedScene" uid="uid://c5x8nan2p4kqt" path="res://ShrinkPowerup.tscn" id="8_cttvr"]
 
 [node name="LevelTemplate" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_fq0ls")]
-position = Vector2(6, -68)
+position = Vector2(1, -63)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
@@ -93,6 +94,24 @@ checkpoint_id = "checkpoint_2"
 
 [node name="LevelExit" parent="." instance=ExtResource("7_kig2u")]
 position = Vector2(5150, -1388)
+next_level_path = "res://levels/fractured_heights/cliffs.tscn"
 
 [node name="CrumblingPlatform7" parent="." instance=ExtResource("6_kcrvw")]
 position = Vector2(5149, -1329)
+
+[node name="ShrinkPowerup" parent="." instance=ExtResource("8_cttvr")]
+position = Vector2(406, 16)
+shrink_duration = 20.0
+
+[node name="ShrinkPowerup2" parent="." instance=ExtResource("8_cttvr")]
+position = Vector2(4056, -734)
+shrink_duration = 20.0
+
+[node name="ShrinkPowerup3" parent="." instance=ExtResource("8_cttvr")]
+position = Vector2(4415, -772)
+shrink_duration = 20.0
+
+[node name="ShrinkPowerup4" parent="." instance=ExtResource("8_cttvr")]
+position = Vector2(4532, -1261)
+shrink_factor = 0.3
+shrink_duration = 20.0

@@ -88,9 +88,9 @@ func handle_game_complete():
 	"""Handle when all levels are complete"""
 	# Return to main menu or show credits
 	if FileAccess.file_exists("res://MainMenu.tscn"):
-		get_tree().change_scene_to_file("res://MainMenu.tscn")
+		get_tree().change_scene_to_file("res://main_menu.tscn")
 	else:
-		get_tree().change_scene_to_file("res://game.tscn")
+		get_tree().change_scene_to_file("res://main_menu.tscn")
 
 # Call this when sacrifices are made to recheck availability
 func recheck_exit_availability():
