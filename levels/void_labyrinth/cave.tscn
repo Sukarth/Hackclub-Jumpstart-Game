@@ -1,13 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://g4lg4bxhhdvf"]
+[gd_scene load_steps=8 format=3 uid="uid://g4lg4bxhhdvf"]
 
 [ext_resource type="PackedScene" uid="uid://ccuespvssreem" path="res://player/player.tscn" id="1_fq0ls"]
 [ext_resource type="TileSet" uid="uid://bxhdhpgj504xn" path="res://main_tileset.tres" id="2_um44m"]
-[ext_resource type="PackedScene" path="res://Checkpoint.tscn" id="3_kcrvw"]
+[ext_resource type="PackedScene" uid="uid://5ifg87a640aq" path="res://Checkpoint.tscn" id="3_kcrvw"]
 [ext_resource type="PackedScene" uid="uid://dkpf7u1wwylm1" path="res://ui/SacrificeChoice.tscn" id="4_kig2u"]
 [ext_resource type="PackedScene" uid="uid://d4bomst41fl0i" path="res://MovingPlatformCave.tscn" id="5_um44m"]
 [ext_resource type="PackedScene" uid="uid://donvyavjjf6es" path="res://CrumblingPlatform.tscn" id="6_kcrvw"]
 [ext_resource type="PackedScene" uid="uid://dualpgyixyf1r" path="res://LevelExit.tscn" id="7_kig2u"]
-[ext_resource type="PackedScene" uid="uid://c5x8nan2p4kqt" path="res://ShrinkPowerup.tscn" id="8_cttvr"]
 
 [node name="LevelTemplate" type="Node2D"]
 
@@ -102,20 +101,3 @@ position = Vector2(5149, -1329)
 visible = false
 
 [node name="SacrificeChoice" parent="UI" instance=ExtResource("4_kig2u")]
-
-[node name="ShrinkPowerup" parent="." instance=ExtResource("8_cttvr")]
-position = Vector2(406, 16)
-shrink_duration = 20.0
-
-[node name="ShrinkPowerup2" parent="." instance=ExtResource("8_cttvr")]
-position = Vector2(4056, -734)
-shrink_duration = 20.0
-
-[node name="ShrinkPowerup3" parent="." instance=ExtResource("8_cttvr")]
-position = Vector2(4415, -772)
-shrink_duration = 20.0
-
-[node name="ShrinkPowerup4" parent="." instance=ExtResource("8_cttvr")]
-position = Vector2(4532, -1261)
-shrink_factor = 0.3
-shrink_duration = 20.0

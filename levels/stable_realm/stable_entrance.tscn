@@ -3,10 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://ccuespvssreem" path="res://player/player.tscn" id="1_vgt4e"]
 [ext_resource type="TileSet" uid="uid://bxhdhpgj504xn" path="res://main_tileset.tres" id="2_13k7l"]
 [ext_resource type="PackedScene" uid="uid://dkpf7u1wwylm1" path="res://ui/SacrificeChoice.tscn" id="2_skox6"]
-[ext_resource type="PackedScene" path="res://MovingPlatform.tscn" id="4_i3xfc"]
-[ext_resource type="PackedScene" path="res://SpinningBoulder.tscn" id="5_3lqqo"]
-[ext_resource type="PackedScene" path="res://Checkpoint.tscn" id="6_p113m"]
-[ext_resource type="PackedScene" path="res://LevelExit.tscn" id="7_v0ve5"]
+[ext_resource type="PackedScene" uid="uid://bs1mf45cnqdcy" path="res://MovingPlatform.tscn" id="4_i3xfc"]
+[ext_resource type="PackedScene" uid="uid://covf1fioo1ne7" path="res://SpinningBoulder.tscn" id="5_3lqqo"]
+[ext_resource type="PackedScene" uid="uid://5ifg87a640aq" path="res://Checkpoint.tscn" id="6_p113m"]
+[ext_resource type="PackedScene" uid="uid://dualpgyixyf1r" path="res://LevelExit.tscn" id="7_v0ve5"]
 [ext_resource type="PackedScene" path="res://DeathBorder.tscn" id="8_v0ve5"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_v0ve5"]
@@ -15,10 +15,12 @@ distance = -1024.0
 [node name="LevelTemplate" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_vgt4e")]
-position = Vector2(47, 394)
+position = Vector2(54, 75)
+scale = Vector2(2, 2)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 visible = false
+zoom = Vector2(0.5, 0.5)
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
@@ -38,7 +40,7 @@ visible = false
 [node name="SacrificeChoice" parent="UI" instance=ExtResource("2_skox6")]
 
 [node name="MovingPlatform" parent="." instance=ExtResource("4_i3xfc")]
-position = Vector2(5787, -553)
+position = Vector2(5971, 75)
 scale = Vector2(4, 4)
 
 [node name="MovingPlatform2" parent="." instance=ExtResource("4_i3xfc")]
@@ -46,27 +48,27 @@ position = Vector2(14583, 339)
 scale = Vector2(4, 4)
 
 [node name="SpinningBoulder" parent="." instance=ExtResource("5_3lqqo")]
-position = Vector2(4527, 966)
+position = Vector2(18026, 1467)
 damage_player = false
 
 [node name="SpinningBoulder2" parent="." instance=ExtResource("5_3lqqo")]
-position = Vector2(4695, 1029)
+position = Vector2(18795, 2022)
 damage_player = false
 
 [node name="SpinningBoulder3" parent="." instance=ExtResource("5_3lqqo")]
-position = Vector2(4515, 814)
+position = Vector2(17997, 1039)
 damage_player = false
 
 [node name="SpinningBoulder4" parent="." instance=ExtResource("5_3lqqo")]
-position = Vector2(4689, 839)
+position = Vector2(18848, 1281)
 damage_player = false
 
 [node name="SpinningBoulder5" parent="." instance=ExtResource("5_3lqqo")]
-position = Vector2(4524, 641)
+position = Vector2(18770, 670)
 damage_player = false
 
 [node name="MovingPlatform3" parent="." instance=ExtResource("4_i3xfc")]
-position = Vector2(19043, 1183)
+position = Vector2(19198, 586)
 scale = Vector2(4, 4)
 
 [node name="Checkpoint" parent="." instance=ExtResource("6_p113m")]
@@ -103,9 +105,9 @@ shape = SubResource("WorldBoundaryShape2D_v0ve5")
 debug_color = Color(1, 1, 1, 1)
 
 [node name="SpinningBoulder6" parent="." instance=ExtResource("5_3lqqo")]
-position = Vector2(4698, 727)
+position = Vector2(17992, 1938)
 damage_player = false
 
 [node name="SpinningBoulder7" parent="." instance=ExtResource("5_3lqqo")]
-position = Vector2(4514, 526)
+position = Vector2(18000, 362)
 damage_player = false
