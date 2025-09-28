@@ -40,7 +40,18 @@ func trigger_level_complete():
 	# Small delay for effect
 	await get_tree().create_timer(1.0).timeout
 	
+	# Check if this is the final level (altar_restoration)
+	var is_final_level = is_current_level_final()
+	
 	if next_level_path != "":
+		# If not the final level, show sacrifice UI first
+		if not is_final_level:
+			var sacrifice_successful = await show_sacrifice_requirement()
+			if not sacrifice_successful:
+				print("⚠️ Sacrifice was not completed, blocking level progression")
+				return
+		
+		# Proceed with level transition
 		# Check if LoreManager exists (may need project restart)
 		if has_node("/root/LoreManager"):
 			# Get lore for the next level
@@ -101,3 +112,62 @@ func handle_game_complete():
 # Call this when sacrifices are made to recheck availability
 func recheck_exit_availability():
 	check_sacrifice_requirement()
+
+func is_current_level_final() -> bool:
+	"""Check if the current level is the final level (altar_restoration)"""
+	# We can check this by looking at the next level path or current scene
+	var current_scene_path = get_tree().current_scene.scene_file_path
+	
+	# Check if the NEXT level is altar_restoration (meaning we're going TO the final level)
+	# or if we have no next level (meaning this IS the final level)
+	var going_to_altar = "altar" in next_level_path.to_lower()
+	var currently_in_altar = "altar" in current_scene_path.to_lower()
+	var is_final_transition = next_level_path == "" # No next level means final
+	
+	print("🔍 Level check - Current: ", current_scene_path, " Next: ", next_level_path)
+	print("🔍 Going to altar: ", going_to_altar, " In altar: ", currently_in_altar, " Final transition: ", is_final_transition)
+	
+	# We want to show sacrifice UI for all levels EXCEPT when going to or in the altar
+	return going_to_altar or currently_in_altar or is_final_transition
+
+func show_sacrifice_requirement() -> bool:
+	"""Show the sacrifice UI and wait for player to make a choice. Returns true if sacrifice was made."""
+	print("🔮 Showing sacrifice requirement for level progression...")
+	
+	# Find the sacrifice UI
+	var sacrifice_ui = get_tree().get_first_node_in_group("sacrifice_ui")
+	if not sacrifice_ui:
+		print("⚠️ No sacrifice UI found! Allowing progression...")
+		return true # Allow progression if no UI is found
+	
+	# Get available sacrifices
+	var available_sacrifices: Array[String] = []
+	var all_possible = ["gravity", "friction", "collision", "jump", "run", "light"]
+	
+	# Check if GameManager exists
+	if not GameManager:
+		print("⚠️ GameManager not found! Allowing progression...")
+		return true
+	
+	for sacrifice in all_possible:
+		if GameManager.can_make_sacrifice(sacrifice):
+			available_sacrifices.append(sacrifice)
+	
+	if available_sacrifices.is_empty():
+		print("⚠️ No available sacrifices - allowing progression")
+		return true
+	
+	print("🔮 Available sacrifices: ", available_sacrifices)
+	
+	# Show the sacrifice UI (make it uncancellable)
+	if sacrifice_ui.has_method("show_sacrifice_options_uncancellable"):
+		sacrifice_ui.show_sacrifice_options_uncancellable(level_name, 1, available_sacrifices)
+	else:
+		# Fallback to regular method
+		sacrifice_ui.show_sacrifice_options(level_name, 1, available_sacrifices)
+	
+	# Wait for sacrifice to be made by awaiting the signal directly
+	await sacrifice_ui.sacrifice_made
+	
+	print("✨ Sacrifice completed, proceeding with level transition")
+	return true
