@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://chl2jix5td472" path="res://scripts/MainMenu.gd" id="1_06t4h"]
 [ext_resource type="Texture2D" uid="uid://wivhujwldiv6" path="res://res/background.png" id="2_7vrkn"]
 [ext_resource type="AudioStream" uid="uid://b17fc45ywxq28" path="res://sfx/button_click.mp3" id="3_fu7sn"]
-[ext_resource type="Texture2D" uid="uid://cr7dhjl3polq5" path="res://icons/github-mark-white.svg" id="4_jix8l"]
+[ext_resource type="Texture2D" uid="uid://cr7dhjl3polq5" path="res://res/icons/github-mark-white.svg" id="4_jix8l"]
 
 [sub_resource type="Animation" id="Animation_7vrkn"]
 length = 0.001

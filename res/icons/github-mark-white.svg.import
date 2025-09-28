@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dufwifqs8da8"
-path="res://.godot/imported/github-mark.svg-1b18675281b238e03a4d3d2bada840d6.ctex"
+uid="uid://cr7dhjl3polq5"
+path="res://.godot/imported/github-mark-white.svg-678d73fce43404f1e3dc4946fbdb89d1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icons/github-mark.svg"
-dest_files=["res://.godot/imported/github-mark.svg-1b18675281b238e03a4d3d2bada840d6.ctex"]
+source_file="res://res/icons/github-mark-white.svg"
+dest_files=["res://.godot/imported/github-mark-white.svg-678d73fce43404f1e3dc4946fbdb89d1.ctex"]
 
 [params]
 
