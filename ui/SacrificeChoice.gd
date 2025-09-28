@@ -120,12 +120,6 @@ func get_sacrifice_info(sacrifice_name: String) -> Dictionary:
 				"description": "Slide endlessly on surfaces - momentum never stops, but movement becomes unpredictable.",
 				"type": "physics"
 			}
-		"collision":
-			return {
-				"title": "👻 Sacrifice Collision",
-				"description": "Phase through all matter like a ghost - walls can't stop you, but neither can floors.",
-				"type": "physics"
-			}
 		"jump":
 			return {
 				"title": "⬇️ Sacrifice Jumping",

@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbo4g85p8gd4h"]
+[gd_scene load_steps=7 format=3 uid="uid://s0414quvpjjh"]
 
-[ext_resource type="Script" uid="uid://iyryjj3d4nuv" path="res://scripts/Credits.gd" id="1_c1t8d"]
+[ext_resource type="Script" path="res://scripts/Credits.gd" id="1_c1t8d"]
 [ext_resource type="Texture2D" uid="uid://wivhujwldiv6" path="res://res/background.png" id="2_g4wvt"]
 [ext_resource type="AudioStream" uid="uid://b17fc45ywxq28" path="res://sfx/button_click.mp3" id="3_g4wvt"]
 
@@ -95,7 +95,7 @@ z_index = 1
 layout_mode = 2
 mouse_filter = 1
 theme_override_font_sizes/font_size = 32
-text = "Quit"
+text = "Main Menu"
 
 [node name="FadeBox" type="ColorRect" parent="."]
 z_index = 2
