@@ -4,8 +4,8 @@
 [ext_resource type="TileSet" uid="uid://bxhdhpgj504xn" path="res://main_tileset.tres" id="2_13k7l"]
 [ext_resource type="PackedScene" uid="uid://dkpf7u1wwylm1" path="res://ui/SacrificeChoice.tscn" id="2_skox6"]
 [ext_resource type="PackedScene" path="res://MovingPlatform.tscn" id="4_i3xfc"]
-[ext_resource type="PackedScene" path="res://Checkpoint.tscn" id="6_p113m"]
-[ext_resource type="PackedScene" path="res://LevelExit.tscn" id="7_v0ve5"]
+[ext_resource type="PackedScene" uid="uid://d3y8eoxg1m5ba" path="res://Checkpoint.tscn" id="6_p113m"]
+[ext_resource type="PackedScene" uid="uid://bggajli62pjm" path="res://LevelExit.tscn" id="7_v0ve5"]
 [ext_resource type="PackedScene" path="res://DeathBorder.tscn" id="8_v0ve5"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_v0ve5"]
@@ -14,7 +14,7 @@ distance = -1725.5947
 [node name="LevelTemplate2" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_vgt4e")]
-position = Vector2(44297, 4549)
+position = Vector2(-560, -8)
 scale = Vector2(2, 2)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
