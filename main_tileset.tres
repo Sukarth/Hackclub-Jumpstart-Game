@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=29 format=3 uid="uid://bxhdhpgj504xn"]
+[gd_resource type="TileSet" load_steps=31 format=3 uid="uid://bxhdhpgj504xn"]
 
 [ext_resource type="Texture2D" uid="uid://cye11hc2vwbr2" path="res://res/tiles/forest/grass_tile.png" id="1_gi5ff"]
 [ext_resource type="Texture2D" uid="uid://uiotcmxb6c7d" path="res://res/tiles/forest/dirt.png" id="2_btehj"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bc3ixqtd02thr" path="res://res/tiles/misc_spritesheet.png" id="6_cl03l"]
 [ext_resource type="Texture2D" uid="uid://c2k7lxnchy317" path="res://res/tiles/forest/grass_slope.png" id="6_wneq4"]
 [ext_resource type="Texture2D" uid="uid://df8v25m0wibgy" path="res://res/tiles/forest/grass_slope_2.png" id="7_44k1m"]
+[ext_resource type="Texture2D" uid="uid://bywjnhi181qdw" path="res://res/tiles/cave/hmm.png" id="7_cl03l"]
 [ext_resource type="Texture2D" uid="uid://ble6bb3hr4xe2" path="res://res/tiles/forest/forest_spritesheet.png" id="8_btehj"]
 [ext_resource type="Texture2D" uid="uid://cg4hc3s6qedqw" path="res://res/tiles/forest/poisonous_plant.png" id="8_mohte"]
 [ext_resource type="Texture2D" uid="uid://d3uauq0ls4kwm" path="res://res/tiles/level_5/level_5_spritesheet.png" id="12_mohte"]
@@ -103,6 +104,12 @@ texture = ExtResource("6_cl03l")
 0:2/0 = 0
 0:3/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u3c7d"]
+texture = ExtResource("7_cl03l")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, -8, -8, -8, 8, 8, 8)
+1:0/0 = 0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1p0jk"]
 texture = ExtResource("3_j74li")
 0:0/0 = 0
@@ -155,7 +162,7 @@ texture = ExtResource("5_j74li")
 2:2/0 = 0
 2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
 3:2/0 = 0
-3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, -8, 8, 1.3939047, -1.3939047, 8, -8)
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, -8, -8, -8, 8, 8, 8)
 4:2/0 = 0
 4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
 5:2/0 = 0
@@ -309,3 +316,4 @@ sources/10 = SubResource("TileSetAtlasSource_7p1ok")
 sources/11 = SubResource("TileSetAtlasSource_bhcdk")
 sources/12 = SubResource("TileSetAtlasSource_sb68x")
 sources/13 = SubResource("TileSetAtlasSource_i8tcm")
+sources/14 = SubResource("TileSetAtlasSource_u3c7d")
