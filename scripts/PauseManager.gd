@@ -92,22 +92,14 @@ func _on_main_menu_requested():
 	print("🏠 Returning to main menu...")
 	get_tree().paused = false # Unpause before changing scene
 	remove_pause_menu()
-	change_scene_safely(MAIN_MENU_PATH)
+	await TransitionManager.transition_to_scene(MAIN_MENU_PATH, "")
 
 func _on_quit_requested():
 	"""Handle quit button press"""
 	print("👋 Quitting game...")
 	get_tree().quit()
 
-func change_scene_safely(scene_path: String):
-	"""Safely change to a new scene"""
-	if not ResourceLoader.exists(scene_path):
-		print("❌ Scene file not found: ", scene_path)
-		return
-	
-	var error = get_tree().change_scene_to_file(scene_path)
-	if error != OK:
-		print("❌ Failed to change scene: ", error)
+# Scene transitions now handled by TransitionManager
 
 # Scene detection - disable pause in menu scenes
 func _on_scene_changed():

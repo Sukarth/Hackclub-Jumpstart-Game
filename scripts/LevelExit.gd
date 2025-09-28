@@ -41,8 +41,8 @@ func trigger_level_complete():
 	await get_tree().create_timer(1.0).timeout
 	
 	if next_level_path != "":
-		# Load next level
-		get_tree().change_scene_to_file(next_level_path)
+		# Load next level with fade transition
+		await TransitionManager.transition_to_scene(next_level_path, "Loading Next Level...")
 	else:
 		# No next level - game complete or return to menu
 		print("🏆 Game Complete!")
@@ -86,11 +86,8 @@ func disable_exit_visual():
 
 func handle_game_complete():
 	"""Handle when all levels are complete"""
-	# Return to main menu or show credits
-	if FileAccess.file_exists("res://MainMenu.tscn"):
-		get_tree().change_scene_to_file("res://main_menu.tscn")
-	else:
-		get_tree().change_scene_to_file("res://main_menu.tscn")
+	# Return to main menu with fade transition
+	await TransitionManager.transition_to_scene("res://main_menu.tscn", "")
 
 # Call this when sacrifices are made to recheck availability
 func recheck_exit_availability():
