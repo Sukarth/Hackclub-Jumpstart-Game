@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1hx8214fir63"
-path="res://.godot/imported/level_5_spritesheet.png-390edcb87d0a9d6dfd4c0f81afe0bf8e.ctex"
+uid="uid://b1d6hohynubuk"
+path="res://.godot/imported/level_4_spritesheet.png-a45060a488af0fbdf347df9e3d9bb001.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/tiles/level_5/level_5_spritesheet.png"
-dest_files=["res://.godot/imported/level_5_spritesheet.png-390edcb87d0a9d6dfd4c0f81afe0bf8e.ctex"]
+source_file="res://res/tiles/level_4/level_4_spritesheet.png"
+dest_files=["res://.godot/imported/level_4_spritesheet.png-a45060a488af0fbdf347df9e3d9bb001.ctex"]
 
 [params]
 
