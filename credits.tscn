@@ -82,17 +82,23 @@ alignment = 1
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
-text = "Lorem Ipsum Game"
+text = "The Custodian"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Thinking: Guy 1
-Uhh: Guy2
-Code: The
-Lorem: Ipsum
-"
+text = "By Hekinav, Sukarth & Ropva
+
+Programming - Sukarth, Hekinav &  Ropva
+Level Design - Sukarth
+Artists  - Ropva  & Hekinav
+Sfx -  Ropva  & Hekinav
+
+
+
+
+28-29/09/2025"
 horizontal_alignment = 1
 
 [node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer"]
