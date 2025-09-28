@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://gh26gs2x7ejr"]
+[gd_scene load_steps=7 format=3 uid="uid://fdr1rpk4bp1t"]
 
 [ext_resource type="Script" uid="uid://chl2jix5td472" path="res://scripts/MainMenu.gd" id="1_06t4h"]
 [ext_resource type="Texture2D" uid="uid://wivhujwldiv6" path="res://res/background.png" id="2_7vrkn"]
@@ -45,6 +45,7 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -55,16 +56,21 @@ script = ExtResource("1_06t4h")
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_filter = 1
 layout_mode = 1
-offset_top = -4.0
-offset_right = 288.0
-offset_bottom = 172.0
+offset_left = 1.8003731
+offset_top = -38.0
+offset_right = 482.8913
+offset_bottom = 256.0
 scale = Vector2(4, 4)
 texture = ExtResource("2_7vrkn")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_right = 1206.0
-offset_bottom = 647.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.628125
+anchor_bottom = 0.5054687
+offset_top = -3.8043451
+offset_right = 714.0
+offset_bottom = 438.0
 mouse_filter = 2
 theme_override_constants/margin_left = 300
 theme_override_constants/margin_right = 300
@@ -75,7 +81,7 @@ alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 128
 text = "Lorem Ipsum Game"
 horizontal_alignment = 1
 
@@ -84,7 +90,7 @@ unique_name_in_owner = true
 z_index = 1
 layout_mode = 2
 mouse_filter = 1
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 64
 text = "Start"
 
 [node name="CreditsButton" type="Button" parent="MarginContainer/VBoxContainer"]
@@ -92,7 +98,7 @@ unique_name_in_owner = true
 z_index = 1
 layout_mode = 2
 mouse_filter = 1
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 64
 text = "Credits"
 
 [node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer"]
@@ -100,16 +106,15 @@ unique_name_in_owner = true
 z_index = 1
 layout_mode = 2
 mouse_filter = 1
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 64
 text = "Quit"
 
 [node name="FadeBox" type="ColorRect" parent="."]
 z_index = 2
 layout_mode = 0
-offset_left = 2.0
-offset_top = -2.0
-offset_right = 1154.0
-offset_bottom = 646.0
+offset_left = -3.8043451
+offset_right = 1939.0
+offset_bottom = 1072.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 

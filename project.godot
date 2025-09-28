@@ -21,6 +21,12 @@ GameManager="*res://scripts/GameManager.gd"
 CheckpointManager="*res://scripts/CheckpointManager.gd"
 PauseManager="*res://scripts/PauseManager.gd"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
+
 [editor]
 
 version_control/autoload_on_startup=true
