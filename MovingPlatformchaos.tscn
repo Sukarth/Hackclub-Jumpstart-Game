@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxpbxeh1r3fna"]
+
+[ext_resource type="Script" uid="uid://duimipg3c0dhs" path="res://moving_platform.gd" id="1_p83y8"]
+[ext_resource type="TileSet" uid="uid://bxhdhpgj504xn" path="res://main_tileset.tres" id="2_e05jk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ff573"]
+
+[node name="MovingPlatform" type="AnimatableBody2D"]
+script = ExtResource("1_p83y8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ff573")
+
+[node name="TileMap" type="TileMap" parent="CollisionShape2D"]
+tile_set = ExtResource("2_e05jk")
+format = 2
+layer_0/tile_data = PackedInt32Array(65535, 131083, 3, 0, 131083, 3, 1, 131083, 3, 2, 131083, 3, 3, 131083, 3, 4, 131083, 3, 5, 131083, 3, -65531, 11, 0, -65532, 131083, 0, -65533, 65547, 0, -65534, 11, 0, -65535, 131083, 0, -65536, 65547, 0, -1, 11, 0, -65530, 65547, 0, 6, 131083, 3, 7, 131083, 3, -65529, 131083, 0)
