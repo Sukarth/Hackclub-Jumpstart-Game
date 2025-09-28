@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://ev0mqr70rj8g"]
+
+[ext_resource type="PackedScene" uid="uid://ccuespvssreem" path="res://player/player.tscn" id="1_j55he"]
+[ext_resource type="TileSet" uid="uid://bxhdhpgj504xn" path="res://main_tileset.tres" id="2_dncfl"]
+[ext_resource type="PackedScene" uid="uid://dkpf7u1wwylm1" path="res://ui/SacrificeChoice.tscn" id="3_wv7dj"]
+
+[node name="LevelTemplate" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_j55he")]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_dncfl")
+format = 2
+
+[node name="SacrificeTriggers" type="Node2D" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="SacrificeChoice" parent="UI" instance=ExtResource("3_wv7dj")]

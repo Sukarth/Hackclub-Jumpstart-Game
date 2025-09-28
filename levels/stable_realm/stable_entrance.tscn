@@ -3,10 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://ccuespvssreem" path="res://player/player.tscn" id="1_vgt4e"]
 [ext_resource type="TileSet" uid="uid://bxhdhpgj504xn" path="res://main_tileset.tres" id="2_13k7l"]
 [ext_resource type="PackedScene" uid="uid://dkpf7u1wwylm1" path="res://ui/SacrificeChoice.tscn" id="2_skox6"]
-[ext_resource type="PackedScene" path="res://MovingPlatform.tscn" id="4_i3xfc"]
-[ext_resource type="PackedScene" path="res://SpinningBoulder.tscn" id="5_3lqqo"]
-[ext_resource type="PackedScene" path="res://Checkpoint.tscn" id="6_p113m"]
-[ext_resource type="PackedScene" path="res://LevelExit.tscn" id="7_v0ve5"]
+[ext_resource type="PackedScene" uid="uid://bs1mf45cnqdcy" path="res://MovingPlatform.tscn" id="4_i3xfc"]
+[ext_resource type="PackedScene" uid="uid://covf1fioo1ne7" path="res://SpinningBoulder.tscn" id="5_3lqqo"]
+[ext_resource type="PackedScene" uid="uid://5ifg87a640aq" path="res://Checkpoint.tscn" id="6_p113m"]
+[ext_resource type="PackedScene" uid="uid://dualpgyixyf1r" path="res://LevelExit.tscn" id="7_v0ve5"]
 [ext_resource type="PackedScene" path="res://DeathBorder.tscn" id="8_v0ve5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ajqqd"]
@@ -74,7 +74,7 @@ checkpoint_id = "checkpoint_4"
 
 [node name="LevelExit" parent="." instance=ExtResource("7_v0ve5")]
 position = Vector2(5724, 1141)
-next_level_path = "res://game.tscn"
+next_level_path = "res://levels/void_labyrinth/cave.tscn"
 
 [node name="DeathBorder" parent="." instance=ExtResource("8_v0ve5")]
 
