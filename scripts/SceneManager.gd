@@ -71,18 +71,16 @@ func transition_to_scene(scene_path: String):
 	is_transitioning = true
 	scene_transition_started.emit(scene_path)
 	
-	# TODO: Add fade out effect
-	print("🌅 Transitioning to: ", scene_path)
+	# Use TransitionManager for fade effects
+	var success = await TransitionManager.transition_to_scene(scene_path, "")
 	
-	# Load the scene
-	var result = get_tree().change_scene_to_file(scene_path)
-	if result == OK:
+	if success:
 		print("✅ Scene loaded successfully")
-		is_transitioning = false
 		scene_transition_completed.emit(scene_path)
 	else:
 		print("❌ Failed to load scene: ", scene_path)
-		is_transitioning = false
+	
+	is_transitioning = false
 
 # Create basic level directory structure
 func create_level_directories():
