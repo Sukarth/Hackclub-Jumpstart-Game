@@ -78,6 +78,7 @@ sources/1 = SubResource("TileSetAtlasSource_feb5d")
 sources/0 = SubResource("TileSetAtlasSource_ryrav")
 
 [node name="Game" type="Node2D"]
+texture_filter = 1
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 texture_filter = 1
