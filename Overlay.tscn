@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://df0jrrdueyxbw"]
+
+[ext_resource type="Texture2D" uid="uid://c6vgcoaoh7lf8" path="res://res/overlay.png" id="1_mi3qu"]
+[ext_resource type="Script" uid="uid://dwhb45gww0pk7" path="res://texture_rect.gd" id="2_q83ut"]
+
+[node name="Overlay" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+scale = Vector2(1.0003388, 1.0002936)
+texture = ExtResource("1_mi3qu")
+script = ExtResource("2_q83ut")
+
+[connection signal="ready" from="CanvasLayer/TextureRect" to="CanvasLayer/TextureRect" method="_on_ready"]

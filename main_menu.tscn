@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://fdr1rpk4bp1t"]
+[gd_scene load_steps=9 format=3 uid="uid://fdr1rpk4bp1t"]
 
 [ext_resource type="Script" uid="uid://chl2jix5td472" path="res://scripts/MainMenu.gd" id="1_06t4h"]
 [ext_resource type="Texture2D" uid="uid://wivhujwldiv6" path="res://res/background.png" id="2_7vrkn"]
 [ext_resource type="AudioStream" uid="uid://b17fc45ywxq28" path="res://sfx/button_click.mp3" id="3_fu7sn"]
 [ext_resource type="Texture2D" uid="uid://cr7dhjl3polq5" path="res://res/icons/github-mark-white.svg" id="4_jix8l"]
+[ext_resource type="PackedScene" uid="uid://df0jrrdueyxbw" path="res://Overlay.tscn" id="5_glbon"]
 
 [sub_resource type="Animation" id="Animation_7vrkn"]
 length = 0.001
@@ -83,7 +84,7 @@ alignment = 1
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 128
-text = "Lorem Ipsum Game"
+text = "The Custodian"
 horizontal_alignment = 1
 
 [node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer"]
@@ -140,6 +141,9 @@ texture_pressed = ExtResource("4_jix8l")
 texture_hover = ExtResource("4_jix8l")
 texture_disabled = ExtResource("4_jix8l")
 texture_focused = ExtResource("4_jix8l")
+
+[node name="Overlay" parent="." instance=ExtResource("5_glbon")]
+position = Vector2(437, 294)
 
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_pressed"]
