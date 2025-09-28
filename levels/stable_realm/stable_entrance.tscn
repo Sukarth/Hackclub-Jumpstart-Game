@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://ccuespvssreem" path="res://player/player.tscn" id="1_vgt4e"]
 [ext_resource type="TileSet" uid="uid://bxhdhpgj504xn" path="res://main_tileset.tres" id="2_13k7l"]
 [ext_resource type="PackedScene" uid="uid://dkpf7u1wwylm1" path="res://ui/SacrificeChoice.tscn" id="2_skox6"]
-[ext_resource type="PackedScene" uid="uid://bs1mf45cnqdcy" path="res://MovingPlatform.tscn" id="4_i3xfc"]
-[ext_resource type="PackedScene" uid="uid://5ifg87a640aq" path="res://Checkpoint.tscn" id="6_p113m"]
-[ext_resource type="PackedScene" uid="uid://dualpgyixyf1r" path="res://LevelExit.tscn" id="7_v0ve5"]
+[ext_resource type="PackedScene" path="res://MovingPlatform.tscn" id="4_i3xfc"]
+[ext_resource type="PackedScene" path="res://Checkpoint.tscn" id="6_p113m"]
+[ext_resource type="PackedScene" path="res://LevelExit.tscn" id="7_v0ve5"]
 [ext_resource type="PackedScene" path="res://DeathBorder.tscn" id="8_v0ve5"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_v0ve5"]
@@ -78,7 +78,7 @@ scale = Vector2(8, 7.999562)
 is_level_start = true
 
 [node name="Checkpoint2" parent="." instance=ExtResource("6_p113m")]
-position = Vector2(21196, 5854.0005)
+position = Vector2(21266, 5455.0005)
 scale = Vector2(8, 7.999562)
 checkpoint_id = "checkpoint_3"
 
