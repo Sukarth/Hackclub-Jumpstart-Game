@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://g4lg4bxhhdvf"]
+[gd_scene load_steps=9 format=3 uid="uid://g4lg4bxhhdvf"]
 
 [ext_resource type="PackedScene" uid="uid://ccuespvssreem" path="res://player/player.tscn" id="1_fq0ls"]
 [ext_resource type="TileSet" uid="uid://bxhdhpgj504xn" path="res://main_tileset.tres" id="2_um44m"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" path="res://MovingPlatformCave.tscn" id="5_um44m"]
 [ext_resource type="PackedScene" path="res://CrumblingPlatform.tscn" id="6_kcrvw"]
 [ext_resource type="PackedScene" path="res://LevelExit.tscn" id="7_kig2u"]
+[ext_resource type="Texture2D" uid="uid://o70xmklff2ec" path="res://res/tiles/cave/basic.png" id="8_cttvr"]
 
 [node name="LevelTemplate" type="Node2D"]
 
@@ -37,31 +38,37 @@ visible = false
 scale = Vector2(4, 4)
 
 [node name="MovingPlatform" parent="." instance=ExtResource("5_um44m")]
+texture_filter = 1
 position = Vector2(7156, -1912)
 scale = Vector2(4, 4)
 move_speed = 8.0
 
 [node name="MovingPlatform2" parent="." instance=ExtResource("5_um44m")]
+texture_filter = 1
 position = Vector2(7240, -1408)
 scale = Vector2(4, 4)
 move_speed = 8.0
 
 [node name="MovingPlatform3" parent="." instance=ExtResource("5_um44m")]
+texture_filter = 1
 position = Vector2(8932, -1224)
 scale = Vector2(4, 4)
 move_speed = 8.0
 
 [node name="MovingPlatform4" parent="." instance=ExtResource("5_um44m")]
+texture_filter = 1
 position = Vector2(8224, -1740)
 scale = Vector2(4, 4)
 move_speed = 8.0
 
 [node name="MovingPlatform5" parent="." instance=ExtResource("5_um44m")]
+texture_filter = 1
 position = Vector2(7916, -624)
 scale = Vector2(4, 4)
 move_speed = 8.0
 
 [node name="MovingPlatform9" parent="." instance=ExtResource("5_um44m")]
+texture_filter = 1
 position = Vector2(7637, -1004)
 scale = Vector2(4, 4)
 move_speed = 8.0
@@ -77,41 +84,55 @@ scale = Vector2(4, 4)
 checkpoint_id = "checkpoint_2"
 
 [node name="MovingPlatform6" parent="." instance=ExtResource("5_um44m")]
+texture_filter = 1
 position = Vector2(9484, -1732)
 scale = Vector2(4, 4)
 move_speed = 8.0
 
 [node name="MovingPlatform7" parent="." instance=ExtResource("5_um44m")]
+texture_filter = 1
 position = Vector2(10324, -1244)
 scale = Vector2(4, 4)
 move_speed = 8.0
 
 [node name="CrumblingPlatform" parent="." instance=ExtResource("6_kcrvw")]
+texture_filter = 1
 position = Vector2(11148, -1364)
 scale = Vector2(4, 4)
 
+[node name="CrumblingPlatform8" parent="." instance=ExtResource("6_kcrvw")]
+texture_filter = 1
+position = Vector2(11614, -1678)
+scale = Vector2(4, 4)
+
 [node name="CrumblingPlatform2" parent="." instance=ExtResource("6_kcrvw")]
-position = Vector2(11752, -1756)
+texture_filter = 1
+position = Vector2(12052, -2049)
 scale = Vector2(4, 4)
 
 [node name="MovingPlatform8" parent="." instance=ExtResource("5_um44m")]
-position = Vector2(13864, -2556)
+texture_filter = 1
+position = Vector2(13927, -2458)
 scale = Vector2(4, 4)
 move_speed = 8.0
 
 [node name="CrumblingPlatform3" parent="." instance=ExtResource("6_kcrvw")]
+texture_filter = 1
 position = Vector2(13376, -2008)
 scale = Vector2(4, 4)
 
 [node name="CrumblingPlatform4" parent="." instance=ExtResource("6_kcrvw")]
+texture_filter = 1
 position = Vector2(12420, -2356)
 scale = Vector2(4, 4)
 
 [node name="CrumblingPlatform5" parent="." instance=ExtResource("6_kcrvw")]
+texture_filter = 1
 position = Vector2(16896, -2816)
 scale = Vector2(4, 4)
 
 [node name="CrumblingPlatform6" parent="." instance=ExtResource("6_kcrvw")]
+texture_filter = 1
 position = Vector2(16512, -2816)
 scale = Vector2(4, 4)
 
@@ -126,5 +147,16 @@ scale = Vector2(4, 4)
 next_level_path = "res://levels/fractured_heights/cliffs.tscn"
 
 [node name="CrumblingPlatform7" parent="." instance=ExtResource("6_kcrvw")]
+texture_filter = 1
 position = Vector2(20596, -5316)
 scale = Vector2(4, 4)
+
+[node name="Basic" type="Sprite2D" parent="."]
+z_index = -2
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(10979, -1993)
+scale = Vector2(4, 4)
+texture = ExtResource("8_cttvr")
+region_enabled = true
+region_rect = Rect2(0, 0, 6000, 2000)

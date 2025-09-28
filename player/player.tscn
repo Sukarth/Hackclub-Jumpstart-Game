@@ -187,9 +187,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbax"]
-radius = 31.0
-height = 122.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g6k8r"]
+size = Vector2(52, 120)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g6k8r"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -214,7 +213,7 @@ animation = &"spawn"
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)
-shape = SubResource("CapsuleShape2D_rkbax")
+shape = SubResource("RectangleShape2D_g6k8r")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 visible = false
