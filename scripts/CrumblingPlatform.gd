@@ -71,7 +71,7 @@ func start_crumbling():
 	
 	if player_on_platform or is_crumbling: # Still fall even if player left
 		start_falling()
-
+		
 func start_warning_effects():
 	"""Visual/audio warnings before falling"""
 	# Shaking effect
@@ -122,7 +122,7 @@ func start_falling():
 		fall_tween.parallel().tween_property(tilemap, "modulate:a", 0.0, 1.0)
 	
 	# Start respawn timer
-	await fall_tween.finished
+	# await fall_tween.finished
 	start_respawn()
 
 func start_respawn():
@@ -144,7 +144,6 @@ func respawn_platform():
 	
 	# Reset position
 	global_position = original_position
-	position = Vector2.ZERO
 	
 	# Reset visual state
 	if tilemap:
@@ -153,6 +152,8 @@ func respawn_platform():
 	# Re-enable collision
 	if collision:
 		collision.disabled = false
+	
+	print(global_position, original_position)
 	
 	# Reset state flags
 	is_crumbling = false

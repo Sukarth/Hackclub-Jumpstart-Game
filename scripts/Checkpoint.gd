@@ -8,8 +8,8 @@ extends Area2D
 # Visual feedback
 @onready var sprite = $Sprite2D if has_node("Sprite2D") else null
 var is_activated: bool = false
-var original_color: Color
-var activated_color: Color = Color.GREEN
+var original_sprite = "default"
+var activated_sprite = "active"
 
 func _ready():
 	# Connect signals if not already connected (scene connections take priority)
@@ -18,7 +18,7 @@ func _ready():
 	
 	# Set up visual feedback
 	if sprite:
-		original_color = sprite.modulate
+		sprite.play("default")
 	
 	# Auto-activate if it's the level start
 	if is_level_start:
@@ -47,9 +47,7 @@ func activate_checkpoint():
 	
 	if sprite and show_activation_effect:
 		# Color change effect
-		var tween = create_tween()
-		tween.tween_property(sprite, "modulate", activated_color, 0.3)
-		
+		$Sprite2D.play("active")
 		# Optional: Particle effect or sound
 		spawn_activation_effect()
 

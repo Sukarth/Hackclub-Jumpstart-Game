@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://du6k7oaxpvncl"]
+[gd_scene load_steps=5 format=3 uid="uid://d1xoevg8omg7p"]
 
 [ext_resource type="Script" uid="uid://c03ieai7oi2mc" path="res://scripts/CrumblingPlatform.gd" id="1_2p32q"]
 [ext_resource type="TileSet" uid="uid://bxhdhpgj504xn" path="res://main_tileset.tres" id="2_4teab"]

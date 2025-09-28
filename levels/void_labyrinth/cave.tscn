@@ -12,7 +12,7 @@
 [node name="LevelTemplate" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_fq0ls")]
-position = Vector2(16500, -3013)
+position = Vector2(12350, -2603)
 collision_layer = 3
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -97,19 +97,16 @@ scale = Vector2(4, 4)
 move_speed = 8.0
 
 [node name="CrumblingPlatform" parent="." instance=ExtResource("6_kcrvw")]
-texture_filter = 1
 position = Vector2(11148, -1364)
 scale = Vector2(4, 4)
 collision_layer = 3
 
 [node name="CrumblingPlatform8" parent="." instance=ExtResource("6_kcrvw")]
-texture_filter = 1
 position = Vector2(11614, -1678)
 scale = Vector2(4, 4)
 collision_layer = 3
 
 [node name="CrumblingPlatform2" parent="." instance=ExtResource("6_kcrvw")]
-texture_filter = 1
 position = Vector2(12052, -2049)
 scale = Vector2(4, 4)
 collision_layer = 3
@@ -121,31 +118,26 @@ scale = Vector2(4, 4)
 move_speed = 8.0
 
 [node name="CrumblingPlatform3" parent="." instance=ExtResource("6_kcrvw")]
-texture_filter = 1
 position = Vector2(13282, -2143)
 scale = Vector2(4, 4)
 collision_layer = 3
 
 [node name="CrumblingPlatform9" parent="." instance=ExtResource("6_kcrvw")]
-texture_filter = 1
 position = Vector2(14462, -2535)
 scale = Vector2(4, 4)
 collision_layer = 3
 
 [node name="CrumblingPlatform4" parent="." instance=ExtResource("6_kcrvw")]
-texture_filter = 1
 position = Vector2(12420, -2356)
 scale = Vector2(4, 4)
 collision_layer = 3
 
 [node name="CrumblingPlatform5" parent="." instance=ExtResource("6_kcrvw")]
-texture_filter = 1
 position = Vector2(16896, -2816)
 scale = Vector2(4, 4)
 collision_layer = 3
 
 [node name="CrumblingPlatform6" parent="." instance=ExtResource("6_kcrvw")]
-texture_filter = 1
 position = Vector2(16512, -2816)
 scale = Vector2(4, 4)
 collision_layer = 3
@@ -161,7 +153,6 @@ scale = Vector2(4, 4)
 next_level_path = "res://levels/fractured_heights/cliffs.tscn"
 
 [node name="CrumblingPlatform7" parent="." instance=ExtResource("6_kcrvw")]
-texture_filter = 1
 position = Vector2(20596, -5316)
 scale = Vector2(4, 4)
 

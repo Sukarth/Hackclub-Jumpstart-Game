@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dualpgyixyf1r"]
+[gd_scene load_steps=5 format=3 uid="uid://bggajli62pjm"]
 
 [ext_resource type="Script" uid="uid://8j302a1j57xj" path="res://scripts/LevelExit.gd" id="1_arm25"]
+[ext_resource type="Texture2D" uid="uid://bc3ixqtd02thr" path="res://res/tiles/misc_spritesheet.png" id="2_n8lvt"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_n8lvt"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_xag1w"]
+atlas = ExtResource("2_n8lvt")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xag1w"]
 
@@ -10,8 +13,7 @@
 script = ExtResource("1_arm25")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(20, 20)
-texture = SubResource("PlaceholderTexture2D_n8lvt")
+texture = SubResource("AtlasTexture_xag1w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_xag1w")
