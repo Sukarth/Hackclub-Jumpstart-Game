@@ -2,16 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://ccuespvssreem" path="res://player/player.tscn" id="1_fq0ls"]
 [ext_resource type="TileSet" uid="uid://bxhdhpgj504xn" path="res://main_tileset.tres" id="2_um44m"]
-[ext_resource type="PackedScene" path="res://Checkpoint.tscn" id="3_kcrvw"]
+[ext_resource type="PackedScene" uid="uid://5ifg87a640aq" path="res://Checkpoint.tscn" id="3_kcrvw"]
 [ext_resource type="PackedScene" uid="uid://dkpf7u1wwylm1" path="res://ui/SacrificeChoice.tscn" id="4_kig2u"]
-[ext_resource type="PackedScene" path="res://MovingPlatformCave.tscn" id="5_um44m"]
-[ext_resource type="PackedScene" path="res://CrumblingPlatform.tscn" id="6_kcrvw"]
-[ext_resource type="PackedScene" path="res://LevelExit.tscn" id="7_kig2u"]
+[ext_resource type="PackedScene" uid="uid://d4bomst41fl0i" path="res://MovingPlatformCave.tscn" id="5_um44m"]
+[ext_resource type="PackedScene" uid="uid://donvyavjjf6es" path="res://CrumblingPlatform.tscn" id="6_kcrvw"]
+[ext_resource type="PackedScene" uid="uid://dualpgyixyf1r" path="res://LevelExit.tscn" id="7_kig2u"]
 
 [node name="LevelTemplate" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_fq0ls")]
-position = Vector2(6, -68)
+position = Vector2(1, -63)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
@@ -92,6 +92,7 @@ checkpoint_id = "checkpoint_2"
 
 [node name="LevelExit" parent="Node2D" instance=ExtResource("7_kig2u")]
 position = Vector2(5150, -1388)
+next_level_path = "res://levels/fractured_heights/cliffs.tscn"
 
 [node name="CrumblingPlatform7" parent="Node2D" instance=ExtResource("6_kcrvw")]
 position = Vector2(5149, -1329)
