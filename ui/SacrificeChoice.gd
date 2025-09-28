@@ -179,7 +179,7 @@ func create_sacrifice_button(sacrifice_name: String):
 	button.add_theme_color_override("font_hover_color", Color.YELLOW)
 	
 	# Style the button based on sacrifice type
-	if sacrifice_name in [ "friction", "collision"]:
+	if sacrifice_name in ["friction", "collision"]:
 		button.modulate = Color.CYAN
 	elif sacrifice_name in ["jump", "run", "light"]:
 		button.modulate = Color.YELLOW
