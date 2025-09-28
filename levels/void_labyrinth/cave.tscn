@@ -2,17 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://ccuespvssreem" path="res://player/player.tscn" id="1_fq0ls"]
 [ext_resource type="TileSet" uid="uid://bxhdhpgj504xn" path="res://main_tileset.tres" id="2_um44m"]
-[ext_resource type="PackedScene" path="res://Checkpoint.tscn" id="3_kcrvw"]
+[ext_resource type="PackedScene" uid="uid://d3y8eoxg1m5ba" path="res://Checkpoint.tscn" id="3_kcrvw"]
 [ext_resource type="PackedScene" uid="uid://dkpf7u1wwylm1" path="res://ui/SacrificeChoice.tscn" id="4_kig2u"]
 [ext_resource type="PackedScene" path="res://MovingPlatformCave.tscn" id="5_um44m"]
 [ext_resource type="PackedScene" uid="uid://btpj12mqymrqr" path="res://CrumblingPlatform.tscn" id="6_kcrvw"]
-[ext_resource type="PackedScene" path="res://LevelExit.tscn" id="7_kig2u"]
+[ext_resource type="PackedScene" uid="uid://bggajli62pjm" path="res://LevelExit.tscn" id="7_kig2u"]
 [ext_resource type="Texture2D" uid="uid://o70xmklff2ec" path="res://res/tiles/cave/basic.png" id="8_cttvr"]
 
 [node name="LevelTemplate" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_fq0ls")]
-position = Vector2(12350, -2603)
+position = Vector2(25, -226)
 collision_layer = 3
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -156,7 +156,8 @@ next_level_path = "res://levels/fractured_heights/cliffs.tscn"
 position = Vector2(20596, -5316)
 scale = Vector2(4, 4)
 
-[node name="Basic" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="."]
+visible = false
 z_index = -2
 texture_filter = 1
 texture_repeat = 2

@@ -15,13 +15,14 @@ script = ExtResource("1_2p32q")
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_4teab")
 format = 2
-layer_0/tile_data = PackedInt32Array(65533, 393220, 0, 65534, 393220, 0, 65535, 393220, 0, 0, 393220, 0, 1, 393220, 0, 2, 393220, 0)
+layer_0/tile_data = PackedInt32Array(65533, 11, 0, 65534, 65547, 0, 65535, 131083, 0, 0, 11, 0, 1, 65547, 0, 2, 131083, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7.5)
 shape = SubResource("RectangleShape2D_platform")
 
 [node name="DetectionArea" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 position = Vector2(0, 7.5)

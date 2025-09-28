@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://ccuespvssreem"]
+[gd_scene load_steps=32 format=3 uid="uid://ccuespvssreem"]
 
 [ext_resource type="Script" uid="uid://xv8ty6q8ikic" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://crebc6ao1gft2" path="res://player/player_idle.png" id="2_rkbax"]
@@ -190,6 +190,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g6k8r"]
 size = Vector2(52, 120)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g6k8r"]
+radius = 29.0
+height = 126.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g6k8r"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
@@ -214,6 +218,14 @@ animation = &"spawn"
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_g6k8r")
+
+[node name="DeathArea" type="Area2D" parent="."]
+position = Vector2(-1, 0)
+collision_layer = 4
+collision_mask = 4
+
+[node name="DeathCollider" type="CollisionShape2D" parent="DeathArea"]
+shape = SubResource("CapsuleShape2D_g6k8r")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 visible = false

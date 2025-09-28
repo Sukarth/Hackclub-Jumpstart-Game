@@ -9,6 +9,12 @@ var spawned = false
 
 var walking_sfx = load("res://sfx/walking.wav")
 
+# Deadly tile detection system - Using source_id and atlas coordinates
+
+var tile_check_timer = 0.0
+const TILE_CHECK_INTERVAL = 0.1 # Check every 0.1 seconds for performance
+var debug_tiles = true # Set to false to stop tile coordinate spam
+
 # Visual feedback
 @onready var sprite = $Sprite2D if has_node("Sprite2D") else null
 var original_modulate: Color
@@ -27,10 +33,11 @@ func _ready():
 	GameManager.physics_sacrificed.connect(_on_physics_sacrificed)
 	GameManager.ability_sacrificed.connect(_on_ability_sacrificed)
 	GameManager.visual_sacrificed.connect(_on_visual_sacrificed)
+	
+	# Ensure tilemaps are in the correct group for detection
+	call_deferred("setup_tilemap_groups")
 
 func _physics_process(delta: float) -> void:
-	if !spawned:
-		return
 	# === GRAVITY SYSTEM ===
 	if GameManager.has_gravity:
 		# Normal gravity
@@ -108,6 +115,9 @@ func _physics_process(delta: float) -> void:
 		global_position += velocity * delta
 	
 	%Sprite.flip_h = velocity.x > 0
+	
+	# Check for deadly tiles
+	check_deadly_tiles(delta)
 	 
 	var treshold = 200
 	
@@ -123,7 +133,7 @@ func _physics_process(delta: float) -> void:
 		%Sprite.play("default")
 		%AudioPlayer.stream = null
 		%AudioPlayer.stop()
-	else: 
+	else:
 		%Sprite.play("move")
 		if velocity.y == 0 && !%AudioPlayer.playing:
 			%AudioPlayer.stream = walking_sfx
@@ -131,6 +141,50 @@ func _physics_process(delta: float) -> void:
 
 func is_enough_floor():
 	return %RayCast2D.is_colliding()
+
+func check_deadly_tiles(_delta: float):
+	if $DeathArea.get_overlapping_bodies().size():
+		print("DEATH")
+		die_from_deadly_tile()
+
+func _find_tilemaps_recursive(node: Node, tilemap_list: Array):
+	"""Recursively find all TileMap nodes"""
+	if node is TileMap:
+		tilemap_list.append(node)
+	
+	for child in node.get_children():
+		_find_tilemaps_recursive(child, tilemap_list)
+
+
+func die_from_deadly_tile():
+	"""Kill the player and respawn at last checkpoint"""
+	print("💀 Player touched deadly tile!")
+	
+	# Visual feedback
+	if sprite:
+		var death_tween = create_tween()
+		death_tween.tween_property(sprite, "modulate", Color.RED, 0.2)
+		death_tween.tween_property(sprite, "modulate", Color.TRANSPARENT, 0.3)
+	
+	# Respawn at checkpoint after short delay
+	await get_tree().create_timer(0.5).timeout
+	CheckpointManager.respawn_player()
+	
+	# Reset visual
+	if sprite:
+		sprite.modulate = original_modulate
+
+func setup_tilemap_groups():
+	"""Ensure all TileMap nodes are in the tilemap group"""
+	var tilemaps = []
+	_find_tilemaps_recursive(get_tree().current_scene, tilemaps)
+	
+	for tilemap in tilemaps:
+		if not tilemap.is_in_group("tilemap"):
+			tilemap.add_to_group("tilemap")
+	
+	print("🗺️ Found and grouped ", tilemaps.size(), " tilemaps for deadly tile detection")
+
 # Sacrifice reaction functions
 func _on_physics_sacrificed(law_type: String):
 	if not sprite:
