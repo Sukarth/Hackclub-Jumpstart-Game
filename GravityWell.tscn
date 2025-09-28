@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8yam2n4p7kqr"]
+[gd_scene load_steps=5 format=3 uid="uid://ds0clwxull8m"]
 
-[ext_resource type="Script" path="res://scripts/GravityWell.gd" id="1_gravity"]
+[ext_resource type="Script" uid="uid://cvxkydqyffchb" path="res://scripts/GravityWell.gd" id="1_gravity"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_well"]
 
@@ -11,37 +11,29 @@ radius = 200.0
 
 [node name="GravityWell" type="Area2D"]
 script = ExtResource("1_gravity")
-gravity_strength = 500.0
-max_range = 200.0
-min_range = 20.0
-affects_player = true
-affects_objects = true
-well_type = 0
-visual_effect = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.5, 0.2, 0.8, 0.7)
 scale = Vector2(40, 40)
 texture = SubResource("CanvasTexture_well")
-modulate = Color(0.5, 0.2, 0.8, 0.7)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_well")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-emitting = true
 amount = 100
-lifetime = 2.0
 texture = SubResource("CanvasTexture_particles")
+lifetime = 2.0
 emission_shape = 1
 emission_sphere_radius = 150.0
 direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
 initial_velocity_min = 50.0
 initial_velocity_max = 100.0
-gravity = Vector2(0, 0)
-radial_accel_min = -200.0
+radial_accel_min = -300.0
 radial_accel_max = -300.0
 scale_amount_min = 0.5
-scale_amount_max = 1.5
+scale_amount_max = 10.0
 color = Color(0.8, 0.4, 1, 1)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
