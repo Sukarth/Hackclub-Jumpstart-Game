@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://du6k7oaxpvncl"]
+
+[ext_resource type="Script" uid="uid://c03ieai7oi2mc" path="res://scripts/CrumblingPlatform.gd" id="1_2p32q"]
+[ext_resource type="TileSet" uid="uid://bxhdhpgj504xn" path="res://main_tileset.tres" id="2_4teab"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform"]
+size = Vector2(96, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_detection"]
+size = Vector2(96, 17)
+
+[node name="CrumblingPlatform" type="StaticBody2D"]
+script = ExtResource("1_2p32q")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_4teab")
+format = 2
+layer_0/tile_data = PackedInt32Array(65533, 393220, 0, 65534, 393220, 0, 65535, 393220, 0, 0, 393220, 0, 1, 393220, 0, 2, 393220, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7.5)
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(0, 7.5)
+shape = SubResource("RectangleShape2D_detection")
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_player_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_player_exited"]

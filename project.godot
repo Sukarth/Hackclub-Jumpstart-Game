@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GameManager="*res://scripts/GameManager.gd"
 CheckpointManager="*res://scripts/CheckpointManager.gd"
 PauseManager="*res://scripts/PauseManager.gd"
+TransitionManager="*res://scripts/TransitionManager.gd"
 
 [display]
 

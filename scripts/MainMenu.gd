@@ -25,12 +25,11 @@ func _on_start_pressed():
 		start_game()
 
 func _on_credits_button_pressed():
-	"""Go to credits scene"""
+	"""Show credits screen"""
 	print("📜 Opening credits...")
 	if $AudioStreamPlayer:
 		$AudioStreamPlayer.play()
-	
-	change_scene_safely(CREDITS_PATH)
+	await TransitionManager.transition_to_scene(CREDITS_PATH, "")
 
 func _on_quit_pressed():
 	"""Quit the game"""
@@ -57,20 +56,9 @@ func _input(event):
 
 func start_game():
 	"""Start the first level"""
-	change_scene_safely(FIRST_LEVEL_PATH)
+	await TransitionManager.transition_to_scene(FIRST_LEVEL_PATH, "")
 
-func change_scene_safely(scene_path: String):
-	"""Safely change to a new scene with error handling"""
-	if not ResourceLoader.exists(scene_path):
-		print("❌ Scene file not found: ", scene_path)
-		show_error_message("Scene file not found: " + scene_path)
-		return
-	
-	print("🎬 Changing to scene: ", scene_path)
-	var error = get_tree().change_scene_to_file(scene_path)
-	if error != OK:
-		print("❌ Failed to change scene: ", error)
-		show_error_message("Failed to load scene")
+# Scene transitions now handled by TransitionManager with fade effects
 
 func show_error_message(message: String):
 	"""Show error message to player"""
