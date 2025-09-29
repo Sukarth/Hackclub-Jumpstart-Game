@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cp6oc2sh8s6gh"]
+[gd_scene load_steps=10 format=3 uid="uid://cp6oc2sh8s6gh"]
 
 [ext_resource type="PackedScene" uid="uid://ccuespvssreem" path="res://player/player.tscn" id="1_vgt4e"]
 [ext_resource type="TileSet" uid="uid://bxhdhpgj504xn" path="res://main_tileset.tres" id="2_13k7l"]
 [ext_resource type="PackedScene" uid="uid://dkpf7u1wwylm1" path="res://ui/SacrificeChoice.tscn" id="2_skox6"]
 [ext_resource type="PackedScene" uid="uid://bs1mf45cnqdcy" path="res://MovingPlatform.tscn" id="4_i3xfc"]
 [ext_resource type="PackedScene" uid="uid://d3y8eoxg1m5ba" path="res://Checkpoint.tscn" id="6_p113m"]
+[ext_resource type="PackedScene" uid="uid://b11gx3oggfsvd" path="res://Sign.tscn" id="6_v0ve5"]
 [ext_resource type="PackedScene" uid="uid://bggajli62pjm" path="res://LevelExit.tscn" id="7_v0ve5"]
 [ext_resource type="PackedScene" uid="uid://bvv8s7gojhxdm" path="res://DeathBorder.tscn" id="8_v0ve5"]
 
@@ -74,6 +75,10 @@ checkpoint_id = "checkpoint_5"
 texture_filter = 1
 position = Vector2(5719.6245, 1134.0001)
 next_level_path = "res://levels/void_labyrinth/cave.tscn"
+
+[node name="Sign" parent="Node2D" instance=ExtResource("6_v0ve5")]
+position = Vector2(131.24998, 542.0001)
+text = "Move with wasd and jump with space"
 
 [node name="DeathBorder" parent="." instance=ExtResource("8_v0ve5")]
 position = Vector2(12695, 2074)

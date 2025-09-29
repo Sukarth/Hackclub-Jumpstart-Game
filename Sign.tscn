@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://b11gx3oggfsvd"]
+
+[ext_resource type="Texture2D" uid="uid://bc3ixqtd02thr" path="res://res/tiles/misc_spritesheet.png" id="1_7l4ce"]
+[ext_resource type="Script" uid="uid://135ci2trxuwf" path="res://Sign.gd" id="1_u07du"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u07du"]
+size = Vector2(16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kffo2"]
+atlas = ExtResource("1_7l4ce")
+region = Rect2(16, 48, 16, 16)
+
+[node name="Sign" type="Area2D"]
+script = ExtResource("1_u07du")
+metadata/text = "Lorem Ipsum"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -26)
+scale = Vector2(6, 4)
+shape = SubResource("RectangleShape2D_u07du")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_kffo2")
+
+[node name="Text" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -36.0
+offset_top = -44.0
+offset_right = 688.99994
+offset_bottom = 312.0
+scale = Vector2(0.1, 0.1)
+theme_override_font_sizes/font_size = 64
+text = "Lorem Ipsum"
+horizontal_alignment = 1
+autowrap_mode = 2
