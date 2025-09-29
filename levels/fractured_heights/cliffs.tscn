@@ -7,6 +7,7 @@
 [node name="LevelTemplate" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
+scale = Vector2(8, 8)
 tile_set = ExtResource("2_dncfl")
 format = 2
 
@@ -17,5 +18,6 @@ format = 2
 [node name="SacrificeChoice" parent="UI" instance=ExtResource("3_wv7dj")]
 
 [node name="Player" parent="." instance=ExtResource("1_j55he")]
+scale = Vector2(2, 2)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]

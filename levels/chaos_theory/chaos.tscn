@@ -17,7 +17,7 @@ distance = -1725.5947
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(40, -496)
-scale = Vector2(4, 4)
+scale = Vector2(8, 8)
 
 [node name="SacrificeTriggers" type="Node2D" parent="Node2D"]
 
@@ -79,6 +79,7 @@ checkpoint_id = "checkpoint_2"
 [node name="SacrificeChoice" parent="UI" instance=ExtResource("3_w0yxf")]
 
 [node name="Player" parent="." instance=ExtResource("1_iomyg")]
+scale = Vector2(2, 2)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 

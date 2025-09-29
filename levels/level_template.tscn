@@ -7,6 +7,7 @@
 [node name="LevelTemplate" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
+scale = Vector2(8, 8)
 tile_set = ExtResource("2_13k7l")
 format = 2
 
