@@ -3,29 +3,17 @@
 [ext_resource type="PackedScene" uid="uid://ccuespvssreem" path="res://player/player.tscn" id="1_iomyg"]
 [ext_resource type="TileSet" uid="uid://bxhdhpgj504xn" path="res://main_tileset.tres" id="2_s6xf7"]
 [ext_resource type="PackedScene" uid="uid://dkpf7u1wwylm1" path="res://ui/SacrificeChoice.tscn" id="3_w0yxf"]
-[ext_resource type="PackedScene" path="res://GravityWell.tscn" id="4_k78uf"]
+[ext_resource type="PackedScene" uid="uid://ds0clwxull8m" path="res://GravityWell.tscn" id="4_k78uf"]
 [ext_resource type="PackedScene" uid="uid://bxpbxeh1r3fna" path="res://MovingPlatformchaos.tscn" id="5_otjgo"]
 [ext_resource type="PackedScene" uid="uid://d1xoevg8omg7p" path="res://CrumblingPlatformchaos.tscn" id="6_otjgo"]
-[ext_resource type="PackedScene" path="res://LevelExit.tscn" id="7_nnamr"]
-[ext_resource type="PackedScene" path="res://DeathBorder.tscn" id="8_e8yga"]
-[ext_resource type="PackedScene" path="res://Checkpoint.tscn" id="8_fdqlp"]
+[ext_resource type="PackedScene" uid="uid://bggajli62pjm" path="res://LevelExit.tscn" id="7_nnamr"]
+[ext_resource type="PackedScene" uid="uid://bvv8s7gojhxdm" path="res://DeathBorder.tscn" id="8_e8yga"]
+[ext_resource type="PackedScene" uid="uid://d3y8eoxg1m5ba" path="res://Checkpoint.tscn" id="8_fdqlp"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ww2gt"]
 distance = -1725.5947
 
 [node name="LevelTemplate" type="Node2D"]
-
-[node name="Player" parent="." instance=ExtResource("1_iomyg")]
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-
-[node name="ColorRect" type="ColorRect" parent="Player"]
-z_index = -2
-offset_left = -973.0
-offset_top = -577.0
-offset_right = 977.0
-offset_bottom = 559.0
-color = Color(0.011087579, 0.011087578, 0.01108758, 1)
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(40, -496)
@@ -89,3 +77,15 @@ checkpoint_id = "checkpoint_2"
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="SacrificeChoice" parent="UI" instance=ExtResource("3_w0yxf")]
+
+[node name="Player" parent="." instance=ExtResource("1_iomyg")]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="ColorRect" type="ColorRect" parent="Player"]
+z_index = -2
+offset_left = -973.0
+offset_top = -577.0
+offset_right = 977.0
+offset_bottom = 559.0
+color = Color(0.011087579, 0.011087578, 0.01108758, 1)

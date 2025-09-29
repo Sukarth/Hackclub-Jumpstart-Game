@@ -72,6 +72,8 @@ func _physics_process(delta: float) -> void:
 	
 	var current_speed: float
 	
+	%LightOverlay.visible = not GameManager.has_light
+	print("light test ", GameManager.has_light)
 	if GameManager.can_run:
 		current_speed = BASE_SPEED
 	else:

@@ -1,6 +1,7 @@
-[gd_scene load_steps=32 format=3 uid="uid://ccuespvssreem"]
+[gd_scene load_steps=33 format=3 uid="uid://ccuespvssreem"]
 
 [ext_resource type="Script" uid="uid://xv8ty6q8ikic" path="res://player/player.gd" id="1_rkbax"]
+[ext_resource type="Texture2D" uid="uid://c6vgcoaoh7lf8" path="res://res/overlay.png" id="2_rgyib"]
 [ext_resource type="Texture2D" uid="uid://crebc6ao1gft2" path="res://player/player_idle.png" id="2_rkbax"]
 [ext_resource type="Texture2D" uid="uid://dijwn0pviafit" path="res://player/player_move.png" id="3_g1dw6"]
 [ext_resource type="Texture2D" uid="uid://dfnnj0ekcnbsn" path="res://player/player_fall.png" id="3_qjkh3"]
@@ -207,6 +208,20 @@ corner_radius_bottom_left = 15
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_rkbax")
 
+[node name="LightOverlay" type="TextureRect" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.0003388, 1.0002936)
+texture = ExtResource("2_rgyib")
+
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 texture_filter = 1
@@ -247,4 +262,5 @@ volume_db = 12.0
 unique_name_in_owner = true
 target_position = Vector2(0, 102)
 
+[connection signal="ready" from="LightOverlay" to="LightOverlay" method="_on_ready"]
 [connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]

@@ -6,10 +6,6 @@
 
 [node name="LevelTemplate" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_j55he")]
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_dncfl")
 format = 2
@@ -19,3 +15,7 @@ format = 2
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="SacrificeChoice" parent="UI" instance=ExtResource("3_wv7dj")]
+
+[node name="Player" parent="." instance=ExtResource("1_j55he")]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]

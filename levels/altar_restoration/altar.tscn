@@ -4,17 +4,12 @@
 [ext_resource type="TileSet" uid="uid://bxhdhpgj504xn" path="res://main_tileset.tres" id="2_4twwe"]
 [ext_resource type="PackedScene" uid="uid://dkpf7u1wwylm1" path="res://ui/SacrificeChoice.tscn" id="3_2v7i3"]
 [ext_resource type="PackedScene" uid="uid://ds0clwxull8m" path="res://GravityWell.tscn" id="4_ee4e2"]
-[ext_resource type="PackedScene" path="res://MovingPlatformAltar.tscn" id="5_3igcd"]
-[ext_resource type="PackedScene" path="res://ShrinkPowerup.tscn" id="6_2ga10"]
+[ext_resource type="PackedScene" uid="uid://bwl6i1p5goxx1" path="res://MovingPlatformAltar.tscn" id="5_3igcd"]
+[ext_resource type="PackedScene" uid="uid://c5x8nan2p4kqt" path="res://ShrinkPowerup.tscn" id="6_2ga10"]
 [ext_resource type="PackedScene" uid="uid://d3y8eoxg1m5ba" path="res://Checkpoint.tscn" id="7_pn4ua"]
-[ext_resource type="PackedScene" path="res://GameCompleteArea.tscn" id="8_pn4ua"]
+[ext_resource type="PackedScene" uid="uid://b0f7s8a0bt2t1" path="res://GameCompleteArea.tscn" id="8_pn4ua"]
 
 [node name="LevelTemplate" type="Node2D"]
-
-[node name="Player" parent="." instance=ExtResource("1_akhvy")]
-position = Vector2(115, 50)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_4twwe")
@@ -66,3 +61,8 @@ position = Vector2(3528, 800)
 [node name="ShrinkPowerup2" parent="." instance=ExtResource("6_2ga10")]
 position = Vector2(2691, 833)
 shrink_factor = 0.2
+
+[node name="Player" parent="." instance=ExtResource("1_akhvy")]
+position = Vector2(115, 50)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
