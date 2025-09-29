@@ -79,7 +79,6 @@ checkpoint_id = "checkpoint_2"
 [node name="SacrificeChoice" parent="UI" instance=ExtResource("3_w0yxf")]
 
 [node name="Player" parent="." instance=ExtResource("1_iomyg")]
-scale = Vector2(2, 2)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
