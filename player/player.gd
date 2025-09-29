@@ -39,7 +39,7 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	# === GRAVITY SYSTEM ===
-	if GameManager.has_gravity:
+	if GameManager.has_gravity && not GameManager.has_debug_no_clip_mode:
 		# Normal gravity
 		if not is_enough_floor():
 			velocity += get_gravity() * delta
@@ -55,7 +55,7 @@ func _physics_process(delta: float) -> void:
 
 	# === JUMPING SYSTEM ===
 	if Input.is_action_pressed("jump") and GameManager.can_jump:
-		if GameManager.has_gravity:
+		if GameManager.has_gravity && not GameManager.has_debug_no_clip_mode:
 			# Normal jump (only on ground)
 			if is_enough_floor():
 				velocity.y = BASE_JUMP_VELOCITY
@@ -73,6 +73,23 @@ func _physics_process(delta: float) -> void:
 	var current_speed: float
 	
 	%LightOverlay.visible = not GameManager.has_light
+	
+	if GameManager.has_debug_mode:
+		var no_clip_on = "yes" if GameManager.has_debug_no_clip_mode else "no"
+		%DebugInfo.visible = true
+		%DebugInfo.text = "DEBUG\nNo clip (Home): "+no_clip_on+"\nSacrifices Made\n" +array_to_string(GameManager.sacrifices_made)
+		
+		if GameManager.has_debug_no_clip_mode:
+			#bonus speed yippee also idk if this should be here or in the movement part
+			if Input.is_action_pressed("move_left"):
+				direction -= 2.0
+			if Input.is_action_pressed("move_right"):
+				direction += 3.0
+		
+		
+	else:
+		%DebugInfo.visible = false
+		
 	if GameManager.can_run:
 		current_speed = BASE_SPEED
 	else:
@@ -93,7 +110,7 @@ func _physics_process(delta: float) -> void:
 			velocity.x *= 0.985 # Very gradual slowdown
 
 	# === COLLISION SYSTEM ===
-	if GameManager.has_collision:
+	if GameManager.has_collision && not GameManager.has_debug_no_clip_mode:
 		# Normal physics
 		move_and_slide()
 		
@@ -139,7 +156,7 @@ func _physics_process(delta: float) -> void:
 		if velocity.y == 0 && !%AudioPlayer.playing:
 			%AudioPlayer.stream = walking_sfx
 			%AudioPlayer.play()
-
+		
 func is_enough_floor():
 	return %RayCast2D.is_colliding()
 
@@ -259,7 +276,7 @@ func apply_knockback(force: Vector2):
 		flash_tween.tween_property(sprite, "modulate", Color.WHITE, 0.1)
 
 func _do_glitch():
-	if not sprite or GameManager.has_collision:
+	if not sprite or (GameManager.has_collision  && not GameManager.has_debug_no_clip_mode):
 		return
 		
 	# Random position offset
@@ -275,6 +292,8 @@ func _do_glitch():
 	sprite.position = original_pos
 
 func _input(_event):
+	if Input.is_action_just_pressed("debug_no_clip") and GameManager.has_debug_mode:
+		GameManager.has_debug_no_clip_mode = not GameManager.has_debug_no_clip_mode
 	var sacrifice_ui = get_tree().get_first_node_in_group("sacrifice_ui")
 	if sacrifice_ui and sacrifice_ui.visible:
 		pass
@@ -282,3 +301,9 @@ func _input(_event):
 
 func _on_sprite_animation_finished() -> void:
 	spawned = true
+
+func array_to_string(arr: Array) -> String:
+	var s = ""
+	for i in arr:
+		s += String(i)+"\n"
+	return s

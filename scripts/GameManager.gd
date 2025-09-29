@@ -26,6 +26,10 @@ var sacrifice_points: int = 0
 var current_level: int = 1
 var sacrifices_made: Array[String] = []
 
+#debug mode enabled
+var has_debug_mode: bool = false
+var has_debug_no_clip_mode: bool = false
+
 # Sacrifice functions
 func sacrifice_physics_law(law_type: String):
 	if law_type in sacrifices_made:
@@ -95,6 +99,9 @@ func reset_all_sacrifices():
 	has_light = true
 	has_visuals = true
 	has_audio = true
+	has_debug_mode = false
+	has_debug_no_clip_mode = false
+	
 	visual_corruption_level = 0
 	sacrifice_points = 0
 	current_level = 1

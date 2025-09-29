@@ -6,13 +6,15 @@
 
 [node name="LevelTemplate" type="Node2D"]
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="Node2D" type="Node2D" parent="."]
+scale = Vector2(4, 4)
+
+[node name="TileMap" type="TileMap" parent="Node2D"]
 texture_filter = 1
-scale = Vector2(8, 8)
 tile_set = ExtResource("2_13k7l")
 format = 2
 
-[node name="SacrificeTriggers" type="Node2D" parent="."]
+[node name="SacrificeTriggers" type="Node2D" parent="Node2D"]
 
 [node name="UI" type="CanvasLayer" parent="."]
 

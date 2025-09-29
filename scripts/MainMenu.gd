@@ -3,8 +3,12 @@ extends Control
 
 # Scene paths
 const FIRST_LEVEL_PATH = "res://levels/stable_realm/stable_entrance.tscn"
+const DEBUG_LEVEL_PATH = "res://levels/debug_level.tscn"
+
 const CREDITS_PATH = "res://credits.tscn"
 
+
+		
 func _ready():
 	print("🎮 Main Menu loaded")
 	# Play background music if available
@@ -25,11 +29,17 @@ func _on_start_pressed():
 		start_game()
 
 func _on_credits_button_pressed():
-	"""Show credits screen"""
-	print("📜 Opening credits...")
-	if $AudioStreamPlayer:
-		$AudioStreamPlayer.play()
-	await TransitionManager.transition_to_scene(CREDITS_PATH, "")
+	#checking for debug mode
+	GameManager.has_debug_mode = Input.is_action_pressed("debug_mode")
+	if Input.is_action_pressed("debug_mode"):
+		"""Start the debug level"""
+		await TransitionManager.transition_to_scene(DEBUG_LEVEL_PATH, "")
+	else:
+		"""Show credits screen"""
+		print("📜 Opening credits...")
+		if $AudioStreamPlayer:
+			$AudioStreamPlayer.play()
+		await TransitionManager.transition_to_scene(CREDITS_PATH, "")
 
 func _on_quit_pressed():
 	"""Quit the game"""
@@ -55,6 +65,9 @@ func _input(event):
 		_on_quit_pressed()
 
 func start_game():
+	#checking for debug mode
+	GameManager.has_debug_mode = Input.is_action_pressed("debug_mode")
+		
 	"""Start the first level"""
 	await TransitionManager.transition_to_scene(FIRST_LEVEL_PATH, "")
 
@@ -69,3 +82,6 @@ func show_error_message(message: String):
 func _on_github_button_pressed() -> void:
 	OS.shell_open("https://github.com/Sukarth/Hackclub-Jumpstart-Game")
 	pass # Replace with function body.
+
+
+	
