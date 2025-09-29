@@ -12,6 +12,7 @@
 [node name="LevelTemplate" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
+texture_filter = 3
 scale = Vector2(4, 4)
 tile_set = ExtResource("2_4twwe")
 format = 2

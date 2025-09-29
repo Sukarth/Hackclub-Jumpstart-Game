@@ -57,11 +57,11 @@ position = Vector2(1909.25, -251)
 move_speed = 8.0
 
 [node name="Checkpoint" parent="Node2D" instance=ExtResource("3_kcrvw")]
-position = Vector2(259, 22)
+position = Vector2(256, 20.75)
 is_level_start = true
 
 [node name="Checkpoint2" parent="Node2D" instance=ExtResource("3_kcrvw")]
-position = Vector2(1902, -59)
+position = Vector2(1904, -59.25)
 checkpoint_id = "checkpoint_2"
 
 [node name="MovingPlatform6" parent="Node2D" instance=ExtResource("5_um44m")]

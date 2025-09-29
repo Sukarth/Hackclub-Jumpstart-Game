@@ -48,11 +48,12 @@ position = Vector2(2629, 278)
 position = Vector2(2767, 236)
 
 [node name="LevelExit" parent="Node2D" instance=ExtResource("7_nnamr")]
-position = Vector2(3493, 390)
+texture_filter = 1
+position = Vector2(3492.75, 392.75)
 next_level_path = "res://levels/altar_restoration/altar.tscn"
 
 [node name="Checkpoint" parent="Node2D" instance=ExtResource("8_fdqlp")]
-position = Vector2(-10, 165)
+position = Vector2(-10, 165.875)
 is_level_start = true
 
 [node name="DeathBorder" parent="Node2D" instance=ExtResource("8_e8yga")]
