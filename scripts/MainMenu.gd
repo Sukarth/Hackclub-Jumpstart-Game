@@ -30,11 +30,13 @@ func _on_start_pressed():
 
 func _on_credits_button_pressed():
 	#checking for debug mode
-	GameManager.has_debug_mode = Input.is_action_pressed("debug_mode")
 	if Input.is_action_pressed("debug_mode"):
 		"""Start the debug level"""
+		GameManager.reset_all_sacrifices()
+		GameManager.has_debug_mode = true
 		await TransitionManager.transition_to_scene(DEBUG_LEVEL_PATH, "")
 	else:
+		GameManager.has_debug_mode = false
 		"""Show credits screen"""
 		print("📜 Opening credits...")
 		if $AudioStreamPlayer:
@@ -65,6 +67,8 @@ func _input(event):
 		_on_quit_pressed()
 
 func start_game():
+	#reset sacrifices
+	GameManager.reset_all_sacrifices()
 	#checking for debug mode
 	GameManager.has_debug_mode = Input.is_action_pressed("debug_mode")
 		
