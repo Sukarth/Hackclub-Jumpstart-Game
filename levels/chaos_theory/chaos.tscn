@@ -16,8 +16,8 @@ distance = -1725.5947
 [node name="LevelTemplate" type="Node2D"]
 
 [node name="Node2D" type="Node2D" parent="."]
-position = Vector2(40, -496)
-scale = Vector2(8, 8)
+position = Vector2(40, -511)
+scale = Vector2(4, 4)
 
 [node name="SacrificeTriggers" type="Node2D" parent="Node2D"]
 
