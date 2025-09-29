@@ -6,8 +6,7 @@ var near:bool = false
 func _ready():
 	body_entered.connect(_on_player_entered)
 	body_exited.connect(on_body_exited)
-	%Text.text = text.substr(0,charCount)
-	charCount = 0
+	%Text.text = ""
 
 func _physics_process(delta: float) -> void:
 	if near && text.length()>charCount:
@@ -16,9 +15,10 @@ func _physics_process(delta: float) -> void:
 	elif not near && not charCount == 0:
 		charCount=charCount-1
 		%Text.text = text.substr(0,charCount)
-	print(charCount)
 
 func _on_player_entered(body):
-	near = true
+	if body.is_in_group("player"):
+		near = true
 func on_body_exited(body):
-	near = false
+	if body.is_in_group("player"):
+		near = false

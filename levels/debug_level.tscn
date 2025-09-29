@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxdno4nu66fyj"]
+[gd_scene load_steps=7 format=3 uid="uid://cxdno4nu66fyj"]
 
 [ext_resource type="TileSet" uid="uid://bxhdhpgj504xn" path="res://main_tileset.tres" id="1_spoyw"]
 [ext_resource type="PackedScene" uid="uid://d3y8eoxg1m5ba" path="res://Checkpoint.tscn" id="2_g5ckd"]
 [ext_resource type="PackedScene" uid="uid://dkpf7u1wwylm1" path="res://ui/SacrificeChoice.tscn" id="2_kyyvy"]
 [ext_resource type="PackedScene" uid="uid://ccuespvssreem" path="res://player/player.tscn" id="3_g5ckd"]
 [ext_resource type="PackedScene" uid="uid://bggajli62pjm" path="res://LevelExit.tscn" id="3_kwkfn"]
+[ext_resource type="PackedScene" uid="uid://b11gx3oggfsvd" path="res://Sign.tscn" id="4_kwkfn"]
 
 [node name="LevelTemplate" type="Node2D"]
 
@@ -36,6 +37,10 @@ next_level_path = "res://levels/void_labyrinth/cave.tscn"
 texture_filter = 1
 position = Vector2(633, 392)
 next_level_path = "res://levels/debug_level.tscn"
+
+[node name="Sign" parent="Node2D" instance=ExtResource("4_kwkfn")]
+position = Vector2(-33, 392)
+text = "This is a sign that can have any text"
 
 [node name="UI" type="CanvasLayer" parent="."]
 visible = false
