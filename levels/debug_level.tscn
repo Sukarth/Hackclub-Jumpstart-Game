@@ -38,6 +38,11 @@ texture_filter = 1
 position = Vector2(633, 392)
 next_level_path = "res://levels/debug_level.tscn"
 
+[node name="LevelExit3" parent="Node2D" instance=ExtResource("3_kwkfn")]
+texture_filter = 1
+position = Vector2(688, 392.25)
+next_level_path = "res://levels/fractured_heights/cliffs.tscn"
+
 [node name="Sign" parent="Node2D" instance=ExtResource("4_kwkfn")]
 position = Vector2(-33, 392)
 text = "This is a sign that can have any text"

@@ -185,7 +185,7 @@ func die_from_deadly_tile():
 		death_tween.tween_property(sprite, "modulate", Color.TRANSPARENT, 0.3)
 	
 	# Respawn at checkpoint after short delay
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.25).timeout
 	CheckpointManager.respawn_player()
 	
 	# Reset visual
